@@ -1,0 +1,19 @@
+.body {
+    /* display: flex; */
+    /* box-sizing: border-box; */
+    max-width: 100%;
+    align-self: stretch;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    /* padding: 0 0 222px; */
+    /* gap: var(--gap-21xl); */
+}
+
+.devider::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255, 0, 0, 0), #CE7131 50%, rgba(255, 0, 0, 0));
+}
