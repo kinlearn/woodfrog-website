@@ -235,6 +235,12 @@
   padding: var(--padding-62xl) var(--padding-xl);
   align-content: center;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trustedByBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .trustedByBox img {
@@ -266,6 +272,12 @@
   .trustedByBox img {
     width: 107px;
     height: 35px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .trustedByBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 }
 

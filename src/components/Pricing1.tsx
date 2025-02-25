@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo, useState, type CSSProperties } from "react";
 import styles from "./Pricing1.module.css";
 import ContactForm from "./ContactUs";
+import { Link } from "react-router-dom";
 
 export type Pricing1Type = {
   className?: string;
@@ -29,6 +30,7 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
     return {
       display: contactUsDisplay,
       minWidth: contactUsMinWidth,
+      cursor: "pointer"
     };
   }, [contactUsDisplay, contactUsMinWidth]);
 
@@ -44,15 +46,17 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
       <footer className={[styles.pricing, className].join(" ")}>
         <div className={styles.container}>
           <div className={styles.content}>
-            <img
-              className={styles.logoIcon}
-              loading="lazy"
-              alt=""
-              src="/vector-289.svg"
-            />
+            <Link to="/" className={styles.logoLink}>
+              <img
+                className={styles.logoIcon}
+                loading="lazy"
+                alt="Home"
+                src="/vector-289.svg"
+              />
+            </Link>
             <div className={styles.information}>
               <div className={styles.links}>
-                <div className={styles.aboutUs}>About Us</div>
+                <Link to="/about-us" className={styles.aboutUs} style={{ textDecoration: "none", color: "inherit", fontWeight: "500", cursor: "pointer" }}>About Us</Link>
                 <div className={styles.aboutUs} style={contactUsStyle} onClick={handleClick}>
                   Contact Us
                 </div>
@@ -78,7 +82,6 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
         </div>
       </footer>
       <ContactForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
-
     </>
   );
 };
