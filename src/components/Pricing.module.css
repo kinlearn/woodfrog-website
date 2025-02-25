@@ -143,6 +143,8 @@
   min-width: 119px;
   color: var(--color-gray-200);
 }
+
+/* 🔹 Updated "Get a Free POC" Button Styles */
 .pOCButton {
   border-radius: var(--br-xs);
   background-color: var(--dark-primary-color);
@@ -151,7 +153,25 @@
   align-items: center;
   justify-content: center;
   padding: var(--padding-2xs) var(--padding-mini);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: var(--body-2-medium-size);
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.pOCButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pOCButton:active {
+  transform: scale(0.95);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .buttonContainer,
 .buttonWrapper,
 .content,

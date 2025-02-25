@@ -130,7 +130,7 @@ const whyWoodFrogTwo ={
     }
 const joinOurJourney ={
         title: 'Join the Woodfrog Journey',
-        describe: `"Discover how our cutting-edge AI and analytics solutions can transform your business. Let's collaborate to unlock data-driven growth, efficiency, and success."`,
+        describe: `Discover how our cutting-edge AI and analytics solutions can transform your business. Let's collaborate to unlock data-driven growth, efficiency, and success.`,
     }
 
 const AboutUs: FunctionComponent = () => {
