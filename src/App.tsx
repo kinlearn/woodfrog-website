@@ -24,12 +24,14 @@ import InsurancePolicy from "./components/BlogsPage/InsurancePolicy";
 import StbPredictiveMaintance from "./components/BlogsPage/STBPredictiveMaintance";
 import FactFinder from "./components/BlogsPage/FactFinder";
 import SmartMonitoringView from "./components/pdf/SmartMonitoringView";
-
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy"; // ✅ Import Privacy Policy Page
 
 function App() {
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
+
   useEffect(() => {
     if (action !== "POP") {
       window.scrollTo(0, 0);
@@ -42,12 +44,12 @@ function App() {
 
     switch (pathname) {
       case "/":
-        title = "";
-        metaDescription = "";
+        title = "Home | Woodfrog Tech";
+        metaDescription = "Welcome to Woodfrog Tech.";
         break;
       case "/websitelanding-page-dark-mode":
-        title = "";
-        metaDescription = "";
+        title = "Dark Mode | Woodfrog Tech";
+        metaDescription = "Experience our website in dark mode.";
         break;
     }
 
@@ -67,73 +69,29 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<WebsiteLandingPageDarkMod />} />
+      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/services" element={<Offering />} />
+      <Route path="/offering" element={<OfferingPage />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/demand-forecasting" element={<DemandForecasting />} />
+      <Route path="/Smart-Monitoring" element={<MachineLearning />} />
+      <Route path="/pdf/:page" element={<SmartMonitoringView />} />
+      <Route path="/predictive-maintenance" element={<PredictiveMaintanance />} />
+      <Route path="/smart-manufacturing" element={<SmartManufacturing />} />
+      <Route path="/gas-turbine" element={<GasTurbine />} />
+      <Route path="/tvac-score" element={<TvacScorePrediction />} />
+      <Route path="/customer-churn" element={<CustomerChurn />} />
+      <Route path="/suspect-engine" element={<SuspectEngline />} />
+      <Route path="/insurance-policy" element={<InsurancePolicy />} />
+      <Route path="/stb-predictive" element={<StbPredictiveMaintance />} />
+      <Route path="/fact-finder" element={<FactFinder />} />
 
-      <Route
-        path="/blog"
-        element={<BlogPage />}
-      />
-      <Route
-        path="/services"
-        element={<Offering />}
-      />
-      <Route
-        path="/offering"
-        element={<OfferingPage />}
-      />
-      <Route
-        path="/about-us"
-        element={<AboutUs />}
-      />
-      <Route
-        path="/demand-forecasting"
-        element={<DemandForecasting />}
-      />
-      <Route
-        path="/Smart-Monitoring"
-        element={<MachineLearning />}
-      />
-      <Route
-        path="/pdf/:page"
-        element={<SmartMonitoringView />}
-      />
-      <Route
-        path="/predictive-maintenance"
-        element={<PredictiveMaintanance />}
-      />
-      <Route
-        path="/smart-manufacturing"
-        element={<SmartManufacturing />}
-      />
-      <Route
-        path="/gas-turbine"
-        element={<GasTurbine />}
-      />
-      <Route
-        path="/tvac-score"
-        element={<TvacScorePrediction />}
-      />
-      <Route
-        path="/customer-churn"
-        element={<CustomerChurn />}
-      />
-      <Route
-        path="/suspect-engine"
-        element={<SuspectEngline />}
-      />
-      <Route
-        path="/insurance-policy"
-        element={<InsurancePolicy />}
-      />
-      <Route
-        path="/stb-predictive"
-        element={<StbPredictiveMaintance />}
-      />
-      <Route
-        path="/fact-finder"
-        element={<FactFinder />}
-      />
-      <Route path="/" element={< WebsiteLandingPageDarkMod />} />
+      {/* ✅ Added routes for Privacy Policy and Terms & Conditions */}
+      <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
   );
 }
+
 export default App;

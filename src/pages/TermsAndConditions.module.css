@@ -1,0 +1,58 @@
+.termsContainer {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-primary-text);
+  }
+  
+  .heading {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .lastUpdated {
+    text-align: center;
+    font-size: 0.9rem;
+    color: gray;
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+    color: var(--dark-secondary-text);
+    margin-bottom: 10px;
+  }
+  
+  .section h3 {
+    font-size: 1.2rem;
+    color: var(--dark-primary-color);
+    margin-top: 10px;
+  }
+  
+  .section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .section p {
+    margin-bottom: 15px;
+  }
+  
+  .email {
+    color: var(--dark-primary-color);
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .email:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,147 @@
+/* Ensure full-page consistency */
+.pageWrapper {
+  background-color: var(--color-gray-200); /* Light Mode */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Apply dark mode correctly */
+.darkMode {
+  background-color: var(--color-dark-bg) !important;
+  color: var(--light-primary-text);
+}
+
+/* Wrapper for content */
+.contentWrapper {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: var(--dark-primary-text); /* Default */
+}
+
+/* Ensure text visibility in dark mode */
+.darkMode .contentWrapper {
+  color: var(--light-primary-text);
+}
+
+/* Heading Styles */
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--dark-primary-color);
+}
+
+.darkMode .heading {
+  color: var(--light-primary-text);
+}
+
+/* Date Styling */
+.lastUpdated {
+  font-size: 0.9rem;
+  color: var(--dark-secondary-text);
+  margin-bottom: 20px;
+}
+
+/* Section Headings */
+h2 {
+  font-size: 1.4rem;
+  margin-top: 30px;
+  color: var(--dark-primary-color);
+}
+
+.darkMode h2 {
+  color: var(--light-primary-text);
+}
+
+/* Paragraphs and Lists */
+p, ul {
+  margin-bottom: 20px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+/* Email Link */
+.email {
+  color: var(--dark-primary-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+
+/* jflkjdksflklsdjflsfjslksfjdslkfkfjslkfls */
+
+.body {
+  /* display: flex; */
+  /* box-sizing: border-box; */
+  max-width: 100%;
+  align-self: stretch;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  /* padding: 0 0 222px; */
+  /* gap: var(--gap-21xl); */
+}
+
+.devider::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(255, 0, 0, 0), #CE7131 50%, rgba(255, 0, 0, 0));
+}
+
+.joinUs {
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 300 !important;
+  font-family: 'Inter';
+  color: var(--dark-secondary-text);
+  line-height: 28px;
+  font-weight: 300 !important;
+  font-family: 'Inter';
+  color: var(--dark-secondary-text);
+  background-color: var(--color-gray-200);
+  padding: 0px 165px;
+  font-size: 16px;
+  margin-top: -73px;
+  padding-bottom: 100px;
+}
+
+
+
+
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  .joinUs {
+      padding: 0px 33px;
+      font-size: 15px;
+      margin-top: 0px;
+  }
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {}

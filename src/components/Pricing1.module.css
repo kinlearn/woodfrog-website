@@ -111,6 +111,27 @@
   color: var(--dark-primary-text);
   font-family: var(--caption);
 }
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.footerLink {
+  color: var(--dark-primary-text);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footerLink:hover {
+  color: var(--dark-primary-color);
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 825px) {
   .content,
   .pricing {

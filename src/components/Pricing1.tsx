@@ -24,13 +24,14 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const handleClick = () => {
-    setIsModalVisible(true)
-  }
+    setIsModalVisible(true);
+  };
+
   const contactUsStyle: CSSProperties = useMemo(() => {
     return {
       display: contactUsDisplay,
       minWidth: contactUsMinWidth,
-      cursor: "pointer"
+      cursor: "pointer",
     };
   }, [contactUsDisplay, contactUsMinWidth]);
 
@@ -56,14 +57,40 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
             </Link>
             <div className={styles.information}>
               <div className={styles.links}>
-                <Link to="/about-us" className={styles.aboutUs} style={{ textDecoration: "none", color: "inherit", fontWeight: "500", cursor: "pointer" }}>About Us</Link>
-                <div className={styles.aboutUs} style={contactUsStyle} onClick={handleClick}>
+                <Link
+                  to="/about-us"
+                  className={styles.aboutUs}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    fontWeight: "500",
+                    cursor: "pointer",
+                  }}
+                >
+                  About Us
+                </Link>
+                <div
+                  className={styles.aboutUs}
+                  style={contactUsStyle}
+                  onClick={handleClick}
+                >
                   Contact Us
                 </div>
               </div>
               <div className={styles.social}>
-                <img className={styles.image9Icon} alt="" src="/image-9@2x.png" />
-                <a className={styles.linkedin} href="https://www.linkedin.com/company/woodfrogtech" target="_blank">Linkedin</a>
+                <img
+                  className={styles.image9Icon}
+                  alt=""
+                  src="/image-9@2x.png"
+                />
+                <a
+                  className={styles.linkedin}
+                  href="https://www.linkedin.com/company/woodfrogtech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Linkedin
+                </a>
               </div>
             </div>
           </div>
@@ -76,12 +103,28 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
             />
           </div>
           <hr className={styles.line} />
-          <div className={styles.policyStatement} style={policyStatementStyle}>
-            Policy Statement
+          <div className={styles.footerLinks}>
+            <Link
+              to="/privacy-policy"
+              className={styles.footerLink}
+              style={policyStatementStyle}
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms-and-conditions"
+              className={styles.footerLink}
+              style={policyStatementStyle}
+            >
+              Terms & Conditions
+            </Link>
           </div>
         </div>
       </footer>
-      <ContactForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
+      <ContactForm
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+      />
     </>
   );
 };
