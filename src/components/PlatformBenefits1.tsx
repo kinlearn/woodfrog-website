@@ -10,7 +10,7 @@ export type PlatformBenefits1Type = {
 
 
 const PlatformBenefits1: FunctionComponent<PlatformBenefits1Type> = ({
-  className = "", title = "Latest Insights", padding = ""
+  className = "", title = "Our Latest Work", padding = ""
 }) => {
   const [isDark, setDark] = useState(true);
   window.addEventListener('themeChanged', (e) => {
