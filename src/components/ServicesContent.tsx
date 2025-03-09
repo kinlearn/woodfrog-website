@@ -3,6 +3,7 @@ import styles from "./ServicesContent.module.css";
 import Lottie from "lottie-react";
 import analyticsAnimation from "./BlogsPage/Dataa.json";
 import gsap from "gsap";
+import { useTheme } from "../ThemeContext";
 
 export type ServicesContentType = {
   className?: string;
@@ -11,16 +12,18 @@ export type ServicesContentType = {
 const ServicesContent: FunctionComponent<ServicesContentType> = ({
   className = "",
 }) => {
-  const [isDark, setDark] = useState(true);
+  // const [isDark, setDark] = useState(false);
   const coreServicesRef = useRef<HTMLHeadingElement>(null);
 
-  window.addEventListener('themeChanged', (e) => {
-    if(isDark) {
-      setDark(!isDark);
-    }  else{
-      setDark(!isDark);
-    }
-  })
+  const { isDarkTheme, toggleTheme } = useTheme()
+  // window.addEventListener('themeChanged', (e) => {
+  //   // if(isDark) {
+  //   //   setDark(!isDark);
+  //   // }  else{
+  //   //   setDark(!isDark);
+  //   // }
+  //   setDark(!isDark);
+  // })
 
   useEffect(()=> {
     if (coreServicesRef.current) {
@@ -45,7 +48,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
     <div className="row">
       <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
         <div className="mb-4">
-          <div className={['card','rounded-0', styles.cardBack].join(' ')}>
+          <div className={['card', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
@@ -53,7 +56,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
             </div>
             <div className="card-body">
               <h4 className={['card-title', 'font-weight-bold', styles.textColor].join(' ')}> Data Engineering</h4>
-              <img src={isDark ? './arrow-dark.svg' : './arrow-light.svg'} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
+              <img src={isDarkTheme ? './arrow-dark.svg' : './arrow-light.svg'} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
               <div className={styles.efficientlyManageAnd}>
                 Efficiently manage and transform your data pipelines, ensuring
                 data is clean, organized, and ready for advanced analytics.
@@ -62,7 +65,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
           </div>
         </div>
         <div className="mb-4">
-          <div className={['card','rounded-0', styles.cardBack].join(' ')}>
+          <div className={['card', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
@@ -78,7 +81,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
           </div>
         </div>
         <div className="mb-3">
-          <div className={['card','rounded-0', styles.cardBack].join(' ')}>
+          <div className={['card', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
@@ -98,7 +101,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
 
       <div className="col-lg-4 mb-4 mb-lg-0">
         <div className="mb-4">
-          <div className={['card','rounded-0', styles.cardBack].join(' ')}>
+          <div className={['card', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
@@ -106,7 +109,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
             </div>
             <div className="card-body">
               <h4 className={['card-title', 'font-weight-bold', styles.textColor].join(' ')}> Analytics</h4>
-              <img src={isDark ? './analytics-dark.svg' : './analytics-light.svg'} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
+              <img src={isDarkTheme ? './analytics-dark.svg' : './analytics-light.svg'} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
               <div className={styles.efficientlyManageAnd}>
                 Gain actionable insights through data-driven analytics that empower smarter, faster business decisions.
               </div>
@@ -115,7 +118,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
         </div>
 
         <div className="mb-3">
-          <div className={['card','rounded-0', styles.cardBack].join(' ')}>
+          <div className={['card', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
@@ -123,7 +126,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
             </div>
             <div className="card-body">
               <h4 className={['card-title', 'font-weight-bold', styles.textColor].join(' ')}> LLMOps (Large Language Model Operations)</h4>
-              <img src={isDark ? './LLM-dark.svg' : './LLM-light.svg'} style={{height: isDark ? '': '192px'}} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
+              <img src={isDarkTheme ? './LLM-dark.svg' : './LLM-light.svg'} style={{height: isDarkTheme ? '': '192px'}} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
               <div className={styles.efficientlyManageAnd}>
                 Manage and operationalize large language models efficiently, ensuring seamless integration and performance across applications.
               </div>
@@ -134,7 +137,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
 
       <div className="col-lg-4 mb-4 mb-lg-0">
         <div className="mb-3">
-          <div className={['card','rounded-0', styles.cardBack].join(' ')}>
+          <div className={['card', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
@@ -142,7 +145,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
             </div>
             <div className="card-body">
               <h4 className={['card-title', 'font-weight-bold', styles.textColor].join(' ')}> LLM (Large Language Models)</h4>
-              <img src={isDark ? './LLM-model-dark.svg' : './LLM-light.svg'} style={{height: isDark ? '640px': '640px', width: '400px'}} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
+              <img src={isDarkTheme ? './LLM-model-dark.svg' : './LLM-light.svg'} style={{height: isDarkTheme ? '640px': '640px', width: '400px'}} className={[styles.imageMarginBottom, "img-fluid"].join(' ')} alt="" />
               <div className={styles.efficientlyManageAnd}>
                 Manage and operationalize large language models efficiently, ensuring seamless integration and performance across applications.
               </div>

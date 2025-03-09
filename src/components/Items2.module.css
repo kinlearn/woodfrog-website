@@ -58,6 +58,7 @@
   font-size: var(--body-1-size);
   color: var(--dark-primary-text);
   font-family: var(--caption);
+  cursor: pointer;
 }
 @media screen and (max-width: 450px) {
   .enablingNextGenDigital {

@@ -19,6 +19,7 @@
 
 .cardBack {
   background-color: var(--color-darkslategray-100) !important;
+  border-radius: var(--br-5xl);
 }
 .textColor {
   color: var(--dark-secondary-text);
@@ -69,6 +70,10 @@
   
 }
 
+.cardBack:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
 
 @media screen and (max-width: 1200px) {
   .servicesContent {

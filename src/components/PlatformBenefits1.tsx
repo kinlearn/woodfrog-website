@@ -40,7 +40,7 @@ const PlatformBenefits1: FunctionComponent<PlatformBenefits1Type> = ({
 
         <Items2 image="/image-2@2x.png" text="STB Predictive Maintenance" name="stb-predictive" />
         <Items2 image="/image-2@2x.png" text="Fact Finder" name="fact-finder" />
-        <Items2 image="/image-2@2x.png" text="Tasty test" name="fact-finder" />
+        <Items2 image="/image-2@2x.png" text="See More" name="blog" />
 
 
 

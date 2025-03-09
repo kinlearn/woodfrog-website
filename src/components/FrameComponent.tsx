@@ -85,7 +85,7 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
             </div>
             <div className={styles.heroButton} onClick={handleClick}>
               <div className={styles.heroButtonWrapper}>
-                <div className={styles.aboutUs} >Get Started</div>
+                <div className={styles.aboutUs} >Let's Talk!</div>
               </div>
             </div>
           </div>
