@@ -1,6 +1,6 @@
 .PageDescriptionLeftTitle {
     background-color: var(--color-gray-200);
-    padding: var(--padding-2xs) var(--padding-15xl) ;
+    padding: var(--padding-2xs) var(--padding-15xl);
     box-sizing: border-box;
     gap: var(--gap-21xl);
     max-width: 100%;
@@ -23,50 +23,132 @@
     font-family: var(--caption);
 }
 
-.PageDescriptionLeftTitle>.container>.pageTitle {
-    padding-left: 20px;
+.pageTitle {
     font-size: 28px;
     line-height: 28px;
     font-weight: 300 !important;
     font-family: 'Inter';
     color: var(--dark-secondary-text);
-    /* line-height: 100px; */
     margin-bottom: 20px;
 }
 
-.PageDescriptionLeftTitle>.container>.description {
+.description {
     position: relative;
     font-size: var(--body-2-medium-size);
     line-height: 160%;
     color: var(--dark-secondary-text);
-    padding-left: 22px;
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (max-width: 576px) {
+/* Base layout for all sections */
+.dividedContainer {
+    display: flex;
+    gap: 40px;
+    padding: 30px 0;
+}
+
+/* Even sections: text on left, image on right */
+section.PageDescriptionLeftTitle:nth-of-type(even) .dividedContainer {
+    flex-direction: row;
+}
+
+/* Odd sections: image on left, text on right */
+section.PageDescriptionLeftTitle:nth-of-type(odd) .dividedContainer {
+    flex-direction: row-reverse;
+}
+
+.imageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+}
+
+/* Small devices (phones and tablets up to 768px) */
+@media (max-width: 768px) {
     .PageDescriptionLeftTitle {
         padding: 0;
     }
-    .PageDescriptionLeftTitle .container{
+    
+    .container {
         width: 100%;
-        padding: 20px 10px 19px 20px;
+        padding: 20px;
     }
-    .PageDescriptionLeftTitle>.container>.pageTitle {
+    
+    /* Force stacked layout on mobile regardless of section number */
+    section.PageDescriptionLeftTitle:nth-of-type(odd) .dividedContainer,
+    section.PageDescriptionLeftTitle:nth-of-type(even) .dividedContainer,
+    .dividedContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .imageContainer, 
+    .textContainer {
+        width: 100%;
         padding: 0;
     }
-    .PageDescriptionLeftTitle>.container>.description {
-        padding: 0;
+    
+    /* For mobile: Title -> Image -> Description */
+    .textContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .pageTitle {
+        order: -1; /* Always at the top */
+        width: 100%;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+    
+    .imageContainer {
+        order: 0; /* Image after title */
+        margin: 10px 0;
+    }
+    
+    .description {
+        order: 1; /* Description at the bottom */
     }
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
+@media (min-width: 768px) and (max-width: 992px) {
+    .container {
+        padding: 0 var(--padding-15xl);
+    }
+    
+    .imageContainer img {
+        max-width: 100%;
+        height: auto;
+    }
+}
 
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+    .dividedContainer {
+        gap: 60px;
+    }
+}
 
 /* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
 
 /* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
