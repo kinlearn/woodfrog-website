@@ -20,6 +20,7 @@
 .cardBack {
   background-color: var(--color-darkslategray-100) !important;
   border-radius: var(--br-5xl);
+  height: 100%;
 }
 .textColor {
   color: var(--dark-secondary-text);
@@ -68,6 +69,12 @@
   position: relative;
   margin-bottom: 30px;
   
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .cardBack:hover {

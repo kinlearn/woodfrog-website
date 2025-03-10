@@ -42,6 +42,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--padding-12xs) var(--padding-11xs);
+  cursor: pointer;
 }
 .enablingNextGenDigitalExpeParent {
   align-self: stretch;
@@ -82,6 +83,7 @@
   color: var(--dark-primary-text);
   font-family: var(--caption);
   padding: 15px 10px;
+  cursor: pointer;
 }
 @media screen and (max-width: 450px) {
   .enablingNextGenDigital {

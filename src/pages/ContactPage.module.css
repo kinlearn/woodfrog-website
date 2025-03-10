@@ -1,0 +1,109 @@
+.ContactPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: left;
+    font-family: var(--caption);
+  }
+  
+  .body {
+    flex: 1;
+    padding: 20px 20px 60px; /* Reduced top padding from 40px to 20px */
+    background-color: var(--color-gray-200);
+  }
+  
+  .pageDescriptionWrapper {
+    padding: 20px 0;
+    margin-bottom: 10px;
+  }
+  
+  .contactSection {
+    background-color: var(--color-darkslategray-100);
+    border-radius: 8px;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--dark-primary-text);
+  }
+  
+  .sectionDescription {
+    color: var(--dark-secondary-text);
+    margin-bottom: 2rem;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .contactInfoList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    margin-top: 1.8rem;
+  }
+  
+  .contactItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .contactIconWrapper {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gold;
+    font-size: 20px;
+    background-color: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .contactDetails {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contactLabel {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: var(--dark-primary-text);
+  }
+  
+  .contactValue {
+    color: var(--dark-secondary-text);
+    font-size: 15px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .body {
+      padding: 30px 15px 50px;
+    }
+    
+    .contactSection {
+      padding: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .contactSection {
+      padding: 1.25rem;
+    }
+    
+    .sectionTitle {
+      font-size: 20px;
+      margin-bottom: 1rem;
+    }
+    
+    .contactInfoList {
+      gap: 1.5rem;
+    }
+  }

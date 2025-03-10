@@ -1,3 +1,4 @@
+/* ========= MODAL STYLING (DARK THEME) ========= */
 /* Modal Container with Animation */
 .ant-modal {
   width: 800px !important;
@@ -160,16 +161,146 @@
   color: #F59E0B !important;
 }
 
+/* ========= LIGHT THEME MODAL OVERRIDES ========= */
+body:not(.dark-mode) .ant-modal .ant-modal-content {
+  background: linear-gradient(140deg, #FFFFFF 0%, #F9FAFB 100%) !important;
+  border: 1px solid rgba(245, 158, 11, 0.1) !important;
+  box-shadow: 
+      0 0 40px rgba(245, 158, 11, 0.05),
+      0 0 80px rgba(245, 158, 11, 0.03) !important;
+}
+
+body:not(.dark-mode) .ant-modal-body {
+  color: #333333 !important;
+}
+
+body:not(.dark-mode) .contact-form .form-input {
+  background: rgba(249, 250, 251, 0.9) !important;
+  border: 2px solid rgba(245, 158, 11, 0.2) !important;
+  color: #333333 !important;
+}
+
+body:not(.dark-mode) .contact-form .form-input::placeholder,
+body:not(.dark-mode) .contact-form .react-tel-input .form-control::placeholder,
+body:not(.dark-mode) .contact-form textarea::placeholder,
+body:not(.dark-mode) .contact-form input::placeholder {
+  color: #666666 !important;
+}
+
+body:not(.dark-mode) .contact-form .react-tel-input .form-control {
+  background: rgba(249, 250, 251, 0.9) !important;
+  border: 2px solid rgba(245, 158, 11, 0.2) !important;
+  color: #333333 !important;
+}
+
+body:not(.dark-mode) .contact-form .form-input:hover {
+  background: rgba(249, 250, 251, 0.95) !important;
+}
+
+body:not(.dark-mode) .contact-form .form-input:focus {
+  background: #FFFFFF !important;
+}
+
+/* ========= INLINE FORM STYLES (CONTACT PAGE) ========= */
+/* Ensure consistent styling between modal and inline form */
+.inline-contact-form .contact-form {
+  width: 100%;
+}
+
+/* Special styling for the contact page heading */
+.contact-page-heading {
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  background: linear-gradient(90deg, #F59E0B, #D97706, #B45309) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  letter-spacing: -0.5px !important;
+}
+
+.contact-page-subheading {
+  font-size: 18px !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  max-width: 700px !important;
+  margin: 0 auto 50px !important;
+}
+
+/* Contact info card styling */
+.contact-info-card {
+  height: 100% !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(245, 158, 11, 0.1) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.contact-info-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-5px) !important;
+}
+
+/* Contact info icons */
+.contact-info-icon {
+  font-size: 28px !important;
+  color: #F59E0B !important;
+  margin-right: 16px !important;
+}
+
+/* Contact page card titles */
+.contact-card-title {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+  color: #F59E0B !important;
+}
+
+/* Ensure proper spacing in the contact page */
+.contact-page-container {
+  padding: 80px 20px !important;
+}
+
+/* Animations */
+@keyframes modalFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowText {
+  0% {
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.1);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+}
+
+/* Responsive styling */
 @media (max-width: 768px) {
   .ant-modal {
-      width: 90vw !important;
+    width: 90vw !important;
   }
   
   .ant-modal .ant-modal-content {
-      padding: 32px 24px !important;
+    padding: 32px 24px !important;
   }
   
   .ant-modal-title {
-      font-size: 32px !important;
+    font-size: 32px !important;
+  }
+  
+  .contact-page-heading {
+    font-size: 36px !important;
+  }
+  
+  .contact-page-container {
+    padding: 60px 15px !important;
   }
 }

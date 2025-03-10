@@ -37,6 +37,7 @@
   font-family: inherit;
 }
 .ourExpertTeam {
+  flex: 1;
   position: relative;
   font-size: var(--body-2-medium-size);
   line-height: 160%;
@@ -84,20 +85,26 @@
   align-items: flex-start;
 }
 .unmatchedRoiParent {
-  margin-top: 10px;
-  align-self: stretch;
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-5xs);
+  width: 100%;
 }
 .list1 {
   width: 383px;
   border-radius: var(--br-5xl);
   background-color: var(--color-darkslategray-100);
-  padding: var(--padding-13xl) var(--padding-5xl) var(--padding-39xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-13xl) var(--padding-5xl) var(--padding-13xl) var(--padding-5xl); /* Make padding consistent */
   box-sizing: border-box;
   gap: var(--gap-mini);
-  min-height: 418px;
+  height: 100%; /* Keep this */
+  min-height: 418px; /* Keep this */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .list1:hover {
@@ -126,7 +133,7 @@
   box-sizing: border-box;
   gap: var(--gap-21xl);
 }
-.features {
+/* .features {
   align-self: stretch;
   flex-direction: row;
   align-items: center;
@@ -134,6 +141,18 @@
   align-content: center;
   gap: 24px 20px;
   min-height: 816px;
+} */
+
+.features {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Changed from center to stretch */
+  justify-content: center; /* Changed from flex-start to center */
+  flex-wrap: wrap;
+  gap: 24px 20px;
+  min-height: 816px;
+  width: 100%;
 }
 .getAFree {
   position: relative;
@@ -270,6 +289,11 @@
     gap: var(--gap-xl);
     padding-top: var(--padding-2xl);
     padding-bottom: var(--padding-19xl);
+    box-sizing: border-box;
+  }
+  .list1 {
+    gap: var(--gap-xl);
+    padding: var(--padding-2xl) var(--padding-5xl) var(--padding-2xl) var(--padding-5xl); /* Make top and bottom padding the same */
     box-sizing: border-box;
   }
   .list2 {

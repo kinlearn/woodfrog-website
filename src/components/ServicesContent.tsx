@@ -65,7 +65,7 @@ const ServicesContent: FunctionComponent<ServicesContentType> = ({
           </div>
         </div>
         <div className="mb-4">
-          <div className={['card', styles.cardBack].join(' ')}>
+          <div className={['card','rounded-3', styles.cardBack].join(' ')}>
             <div className="bg-image hover-overlay ripple">
               <a href="#!">
                 <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15);" }}></div>
