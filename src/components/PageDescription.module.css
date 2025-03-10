@@ -43,6 +43,7 @@
     font-size: var(--body-2-medium-size);
     line-height: 160%;
     color: var(--dark-secondary-text);
+    text-align: center;
 }
 
 .open {

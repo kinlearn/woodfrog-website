@@ -1,147 +1,100 @@
-/* Ensure full-page consistency */
-.pageWrapper {
-  background-color: var(--color-gray-200); /* Light Mode */
-  min-height: 100vh;
+.PrivacyPolicy {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
+  text-align: left;
+  font-family: var(--caption);
 }
 
-/* Apply dark mode correctly */
-.darkMode {
-  background-color: var(--color-dark-bg) !important;
-  color: var(--light-primary-text);
+.body {
+  flex: 1;
+  padding: 20px 20px 60px;
+  background-color: var(--color-gray-200);
 }
 
-/* Wrapper for content */
+.pageDescriptionWrapper {
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .contentWrapper {
   max-width: 900px;
-  margin: 50px auto;
-  padding: 40px;
-  line-height: 1.8;
-  font-size: 1rem;
-  color: var(--dark-primary-text); /* Default */
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--color-darkslategray-100);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--dark-primary-text);
+  line-height: 1.6;
 }
 
-/* Ensure text visibility in dark mode */
-.darkMode .contentWrapper {
-  color: var(--light-primary-text);
-}
-
-/* Heading Styles */
-.heading {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--dark-primary-color);
-}
-
-.darkMode .heading {
-  color: var(--light-primary-text);
-}
-
-/* Date Styling */
-.lastUpdated {
-  font-size: 0.9rem;
+.contentWrapper p {
+  margin-bottom: 1rem;
+  font-size: 16px;
   color: var(--dark-secondary-text);
-  margin-bottom: 20px;
 }
 
-/* Section Headings */
-h2 {
+.contentWrapper h2 {
   font-size: 1.4rem;
-  margin-top: 30px;
-  color: var(--dark-primary-color);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--dark-primary-text);
 }
 
-.darkMode h2 {
-  color: var(--light-primary-text);
+.contentWrapper ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  color: var(--dark-secondary-text);
 }
 
-/* Paragraphs and Lists */
-p, ul {
-  margin-bottom: 20px;
+.contentWrapper li {
+  margin-bottom: 0.5rem;
 }
 
-ul {
-  padding-left: 20px;
-}
-
-/* Email Link */
 .email {
-  color: var(--dark-primary-color);
-  font-weight: bold;
+  color: gold;
   text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .email:hover {
   text-decoration: underline;
 }
 
-
-/* jflkjdksflklsdjflsfjslksfjdslkfkfjslkfls */
-
-.body {
-  /* display: flex; */
-  /* box-sizing: border-box; */
-  max-width: 100%;
-  align-self: stretch;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  /* padding: 0 0 222px; */
-  /* gap: var(--gap-21xl); */
-}
-
-.devider::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, rgba(255, 0, 0, 0), #CE7131 50%, rgba(255, 0, 0, 0));
-}
-
-.joinUs {
-  padding-left: 20px;
-  font-size: 16px;
-  line-height: 28px;
-  font-weight: 300 !important;
-  font-family: 'Inter';
-  color: var(--dark-secondary-text);
-  line-height: 28px;
-  font-weight: 300 !important;
-  font-family: 'Inter';
-  color: var(--dark-secondary-text);
-  background-color: var(--color-gray-200);
-  padding: 0px 165px;
-  font-size: 16px;
-  margin-top: -73px;
-  padding-bottom: 100px;
-}
-
-
-
-
-
-
-/* Small devices (landscape phones, 576px and up) */
-@media (max-width: 576px) {
-  .joinUs {
-      padding: 0px 33px;
-      font-size: 15px;
-      margin-top: 0px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contentWrapper {
+    padding: 1.5rem;
   }
-
+  
+  .contentWrapper h2 {
+    font-size: 1.3rem;
+  }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
-
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
-
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {}
+@media (max-width: 576px) {
+  .body {
+    padding: 15px 15px 40px;
+  }
+  
+  .contentWrapper {
+    padding: 1.25rem;
+  }
+  
+  .contentWrapper h2 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .contentWrapper p, .contentWrapper li {
+    font-size: 15px;
+  }
+}
