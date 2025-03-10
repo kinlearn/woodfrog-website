@@ -23,9 +23,6 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
   policyStatementMinWidth,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const handleClick = () => {
-    setIsModalVisible(true);
-  };
 
   const contactUsStyle: CSSProperties = useMemo(() => {
     return {
@@ -69,13 +66,18 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
                 >
                   About Us
                 </Link>
-                <div
+                <Link
+                  to="/contact-us"
                   className={styles.aboutUs}
-                  style={contactUsStyle}
-                  onClick={handleClick}
+                  style={{
+                    ...contactUsStyle,
+                    textDecoration: "none",
+                    color: "inherit",
+                    fontWeight: "500",
+                  }}
                 >
                   Contact Us
-                </div>
+                </Link>
               </div>
               <div className={styles.social}>
                 <img
@@ -121,12 +123,8 @@ const Pricing1: FunctionComponent<Pricing1Type> = ({
           </div>
         </div>
       </footer>
-      <ContactForm
-        isModalVisible={isModalVisible}
-        setIsModalVisible={setIsModalVisible}
-      />
     </>
   );
 };
 
-export default Pricing1;
+export default Pricing1;  
