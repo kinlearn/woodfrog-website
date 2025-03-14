@@ -4,6 +4,7 @@ import styles from "./HorizontalTabs.module.css";
 import "./BlogsPage/Common.css";
 import "bootstrap/dist/css/bootstrap.css";
 import HeaderComponet from "./HeaderComponent";
+import Footer from "./Footer"; // Added Footer import
 import Badge from "./Badge";
 import PlatformBenefits1 from "./PlatformBenefits1";
 import { Link, useNavigate } from "react-router-dom";
@@ -132,6 +133,7 @@ const BlogComponent: FunctionComponent<BlogComponentsType> = ({
                     <PlatformBenefits1 title="Recommended Articles" padding="0px" />
                 </div>
             </div>
+            <Footer /> {/* Added Footer component */}
         </div>
     )
 }

@@ -1,123 +1,375 @@
 import { FunctionComponent } from "react";
-// import styles from "./UnOrderList.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from "./OfferingPage.module.css";
-import HeaderComponet from "../components/HeaderComponent";
-// import UnOrderList from "../components/UnorderList";
+import HeaderComponent from "../components/HeaderComponent";
 import Footer from "../components/Footer";
-import PageDescription from "../components/PageDescription";
-import UnOrderListOffering from "../components/UnOrderListOffering";
-import PageDescriptionLeftTitle from "../components/PageDescriptionLeftTitle";
+import { useTheme } from "../ThemeContext";
+import { FiSettings, FiCpu, FiDatabase, FiBarChart2, FiCode, FiTrello, FiAward } from "react-icons/fi";
 
-const offeringPageDescription = {
-    title: 'Woodfrog Offering',
-    describe: ' '
-    // describe: `At Woodfrog Tech, we believe in empowering businesses to thrive. 
-    // We combine industry expertise with cutting-edge data science and AI capabilities to deliver tailored solutions that drive growth and competitiveness. 
-    // Through collaborative innovation, we help clients uncover new opportunities, optimize their data landscape, and make informed decisions. 
-    // Our goal is to enable self-sufficiency, putting the power of data-driven intelligence in your hands, so you can navigate the future with confidence.`
+// TypeScript interfaces for type safety
+interface ServiceFeature {
+  title: string;
+  description: string;
+  icon?: string;
+  image?: string;
+  imageAlt?: string;
 }
 
-const dataScienceDescribe = {
-    title: 'Data Science',
-    describe: `At Woodfrog Tech, we believe in empowering businesses to thrive.
-     We combine industry expertise with cutting-edge data science and AI capabilities to deliver tailored solutions that drive growth and competitiveness.
-     Through collaborative innovation, we help clients uncover new opportunities, optimize their data landscape, and make informed decisions.
-     Our goal is to enable self-sufficiency, putting the power of data-driven intelligence in your hands, so you can navigate the future with confidence.`
+interface ServiceCategory {
+  title: string;
+  description: string;
+  features: ServiceFeature[];
+  image?: string;
+  imageAlt?: string;
 }
 
-const dataScience = {
-    title: '',
-    describe: ``,
-    items: [
-        `AI &ML Based Strategy Development: Woodfrog Tech's AI & ML Based Strategy Development service combines business acumen with technical expertise to
-         drive transformative growth. Our team conducts thorough assessments of your business processes, pain points, cost leakages, and technology landscape.
-         We then develop a customized AI/ML strategy, complete with a clear roadmap, to address your unique challenges, optimize operations, 
-         and unlock innovative opportunities.
-        `,
-        `AI & ML Based Product Development: Unlock the transformative power of Artificial Intelligence and Machine Learning with Woodfrog.
-         We craft cutting-edge products that drive business growth, enhance customer experiences, and solve complex problems.
-         Leveraging the latest AI/ML technologies, we design, develop, and deploy intelligent solutions that learn, adapt, and evolve with your organization.
-         From predictive analytics and natural language processing to computer vision and automation, we apply AI/ML expertise to help you stay ahead of the curve.
-         Partner with us to create innovative, user-centric products that streamline operations, foster engagement, and propel your business forward.`,
-        `Enterprise Data Management: Transform your data landscape with Woodfrog.
-         We assess, strategize, and optimize your enterprise data to unlock its full potential.
-         We ensure seamless data democratization, conduct user persona analysis, reduce data management costs, implement automation, and align data with business priorities.
-         Partnering with Woodfrog empowers your organization to make informed decisions, streamline operations, and drive growth - all while maintaining control over your valuable data assets.
-        `,
-        `Data Analytics Services: Woodfrog's data analytics services empower your organization to make informed decisions, drive business growth, and optimize performance.
-         We provide comprehensive data analysis, transforming complex data into actionable insights.
-         Our services include data visualization, predictive analytics, data mining, and business intelligence solutions, helping you identify trends, patterns, and opportunities.
-         From data strategy development to implementation and ongoing support, we ensure seamless integration and maximum ROI.
-         With Woodfrog, harness the power of data-driven decision-making to propel your business forward, enhance customer experiences, and stay ahead of the competition.
-         `,
-        `Data Visualization Services: Unlock the power of your data with our innovative Data Visualization Services.
-         Our expert team transforms complex financial, accounting, Customer Service, Executive and Strategic, HR & any other valuable data into compelling, easy-to-understand visual stories.
-         We combine data science expertise with psychological insights to craft engaging, informative, and impactful visualizations that resonate with your `,
-        `audience.
-         By applying the principles of cognitive psychology and visual perception, we ensure that your key messages are conveyed clearly, effectively, and memorably.
-
-Data Quality : We offer comprehensive Data Quality Checks to ensure accuracy, consistency, and reliability of your data.
- Our expert team utilizes advanced tools and methodologies to identify and rectify errors, inconsistencies, and inaccuracies, enhancing data integrity and analytics accuracy.
- By leveraging our data quality services, businesses can reduce data-related risks and costs, optimize decision-making, and increase efficiency.
- Our tailored solutions include data profiling, validation, cleansing, standardization, governance, and compliance, empowering informed decision-making and business growth
-`
+// Content data for the Offering page
+const offeringData = {
+  hero: {
+    title: "Unlock the Power of Data & AI",
+    description: "Woodfrog provides cutting-edge data science and AI solutions that transform raw information into strategic business advantages.",
+    backgroundImage: "/images/hero-pattern.svg"
+  },
+  categories: [
+    {
+      title: "Data Science Solutions",
+      description: "We combine industry expertise with advanced data science capabilities to help you uncover opportunities, optimize operations, and make informed decisions.",
+      image: "/images/data-science-main.jpg",
+      imageAlt: "Data science visualization",
+      features: [
+        {
+          title: "AI & ML Strategy Development",
+          description: "We create customized AI/ML roadmaps aligned with your business goals. Our approach includes thorough assessment of your processes, identification of pain points, and development of strategic implementation plans.",
+          icon: "strategy-icon",
+          image: "/images/ai-strategy.jpg",
+          imageAlt: "Strategic planning illustration"
+        },
+        {
+          title: "Product Development",
+          description: "Our team builds intelligent products that learn and evolve with your business. From concept to deployment, we deliver solutions that enhance customer experiences and drive growth.",
+          icon: "product-icon",
+          image: "/images/product-dev.jpg",
+          imageAlt: "Product development cycle"
+        },
+        {
+          title: "Enterprise Data Management",
+          description: "Transform your data landscape with our comprehensive approach to data management. We ensure seamless data democratization, reduce costs, and align your data with business priorities.",
+          icon: "data-icon",
+          image: "/images/enterprise-data.jpg",
+          imageAlt: "Data management system"
+        },
+        {
+          title: "Advanced Analytics",
+          description: "Turn complex data into actionable insights with our analytics services. We provide data visualization, predictive analytics, and business intelligence solutions tailored to your needs.",
+          icon: "analytics-icon",
+          image: "/images/analytics.jpg",
+          imageAlt: "Analytics dashboard"
+        }
+      ]
+    },
+    {
+      title: "Large Language Models & AI Agents",
+      description: "Harness the revolutionary power of LLMs and AI agents to automate complex tasks, unlock insights, and transform your business operations.",
+      image: "/images/llm-main.jpg",
+      imageAlt: "AI language model illustration",
+      features: [
+        {
+          title: "Custom LLM Solutions",
+          description: "Generic solutions don't address unique business challenges. We create tailored LLM implementations infused with your specific business context and domain expertise, ensuring you maintain control of your data.",
+          icon: "custom-icon",
+          image: "/images/custom-llm.jpg",
+          imageAlt: "Custom AI solution"
+        },
+        {
+          title: "Automation & Scaling",
+          description: "Our LLM solutions can automate up to 100% of repetitive tasks, dramatically improving efficiency and accuracy while reducing costs. Scale your operations with confidence using our AI-powered tools.",
+          icon: "automation-icon",
+          image: "/images/automation.jpg",
+          imageAlt: "Business automation"
+        },
+        {
+          title: "Intelligent Agents",
+          description: "Our LLM Agents and Small Language Models work together to tackle specific business needs. They enhance productivity, streamline workflows, and deliver personalized experiences with minimal computational resources.",
+          icon: "agent-icon",
+          image: "/images/agents.jpg",
+          imageAlt: "AI agents at work"
+        }
+      ]
+    }
+  ],
+  useCases: {
+    title: "Real-World Success Stories",
+    description: "See how our solutions have created measurable impact for our clients",
+    cases: [
+      {
+        industry: "Retail Analytics",
+        description: "Helped a retail chain improve inventory forecasting accuracy by 22% and reduce out-of-stock instances by 35% through advanced predictive analytics.",
+        image: "/images/retail-case.jpg"
+      },
+      {
+        industry: "Healthcare Operations",
+        description: "Developed a patient flow optimization system that reduced average wait times by 40% and improved resource allocation for a major healthcare provider.",
+        image: "/images/healthcare-case.jpg"
+      },
+      {
+        industry: "Financial Services",
+        description: "Created a custom LLM solution that automated document processing and reduced manual review time by 70% while maintaining strict compliance standards.",
+        image: "/images/finance-case.jpg"
+      },
+      {
+        industry: "Manufacturing",
+        description: "Implemented a predictive maintenance system that decreased unplanned downtime by 27% and extended equipment lifespan by an estimated 15-20%.",
+        image: "/images/manufacturing-case.jpg"
+      }
     ]
-}
-const llmDescribe = {
-    title: 'LLM & Agents',
-    describe: `At Woodfrog, we're harnessing the power of Large Language Models (LLMs) and their agents to revolutionize the way we work. 
-    By automating complex tasks and unlocking hidden insights, we're transforming raw data into actionable intelligence. 
-    Our innovative approach combines human creativity with AI-driven expertise, generating novel solutions and products that drive progress. 
-    With LLMs and agents, we're streamlining workflows, amplifying productivity, and uncovering new possibilities. Join us in shaping a future
-     where human ingenuity and machine intelligence converge, giving rise to unprecedented breakthroughs and opportunities.`,
-    // items: [
-    //     'Predictive maintenance: Minimizing downtime and optimizing resource allocation',
-    //     'Demand forecasting: Informing inventory management and supply chain optimization',
-    //     'Customer experience enhancements: Personalizing interactions and improving satisfaction',
-    //     'Large language model (LLM) agents: Revolutionizing customer support and engagement'
-    // ]
-}
-const llm = {
-    title: 'LLM & Agents',
-    describe: `At Woodfrog, we're harnessing the power of Large Language Models (LLMs) and their agents to revolutionize the way we work. By automating complex tasks and unlocking hidden insights, we're transforming raw data into actionable intelligence. Our innovative approach combines human creativity with AI-driven expertise, generating novel solutions and products that drive progress. With LLMs and agents, we're streamlining workflows, amplifying productivity, and uncovering new possibilities. Join us in shaping a future where human ingenuity and machine intelligence converge, giving rise to unprecedented breakthroughs and opportunities.`,
-    items: [
-        `Custom LLM Solutions: At Woodfrog, we recognize that generic Large Language Models (LLMs) may not meet the complex needs of your business. That's why we empower you with customized LLM solutions infused with your unique business context and domain expertise. Our expert team crafts fine-tuned datasets, optimizes open-source and closed-source models, and deploys refined models in your cloud environment, ensuring you retain control and protection over your data. With ongoing performance monitoring and timely upgrades, we ensure your customized LLM stays ahead of the curve. Partner with us to unlock the full potential of tailored LLMs, driving innovation and growth that resonates with your business.
-`,
-        `LLM for automation & scale: woodfrog's Large Language Models (LLMs) empower businesses to achieve unprecedented efficiency, scalability, and growth. By automating repetitive tasks, boosting accuracy, and cutting costs by up to 100%, our solutions enable you to scale your business with confidence, amplifying productivity, accelerating decision-making, and enhancing customer experiences. With up to 100% automation, you can drive innovation and revenue growth, streamline operations, and propel your business forward, leveraging Woodfrog's expertise to transform your operations and stay ahead of the competition.
-`,
-        `LLM Agents & Small Language Models (SLMs): Unlock effortless productivity with Woodfrog's Intelligent LLM Agents and Small Language Models (SLMs), your personalized AI duo. Automate tedious tasks, personalize customer experiences, and streamline workflows with easy build and deployment, lightweight scalable design, tailored interactions, efficient automation, boosted productivity, low-latency responses, minimal computational resources, and flexible cloud, on-premise, or edge deployment. Our AI-powered solution combines LLM and SLM strengths to tackle specific needs, amplify efficiency, and revolutionize your workday, delivering unparalleled productivity, reduced infrastructure costs, and enhanced customer satisfaction with adaptive, scalable, and secure technology.`,
+  },
+  process: {
+    title: "Our Approach",
+    description: "How we deliver exceptional results through a proven methodology",
+    steps: [
+      {
+        number: "01",
+        title: "Discovery",
+        description: "We begin by understanding your business, challenges, and objectives through in-depth consultation."
+      },
+      {
+        number: "02",
+        title: "Assessment",
+        description: "Our team analyzes your data landscape, identifies opportunities, and creates a tailored strategy."
+      },
+      {
+        number: "03",
+        title: "Development",
+        description: "We build and refine customized solutions aligned with your specific business needs."
+      },
+      {
+        number: "04",
+        title: "Implementation",
+        description: "Solutions are seamlessly integrated into your operations with minimal disruption."
+      },
+      {
+        number: "05",
+        title: "Optimization",
+        description: "We continuously monitor, analyze, and improve performance to maximize long-term value."
+      }
     ]
+  }
+};
+
+// Hero Section Component
+const HeroSection: FunctionComponent = () => {
+  const { isDarkTheme } = useTheme();
+  
+  return (
+    <section className={styles.heroSection}>
+      <div className={styles.heroPattern} style={{backgroundImage: `url(${offeringData.hero.backgroundImage})`}}></div>
+      <div className={styles.heroContainer}>
+        <h1 className={`${styles.heroTitle} ${isDarkTheme ? styles.darkThemeHeading : ''}`}>{offeringData.hero.title}</h1>
+        <p className={styles.heroDescription}>{offeringData.hero.description}</p>
+      </div>
+    </section>
+  );
+};
+
+// Category Overview Component
+interface CategoryOverviewProps {
+  category: ServiceCategory;
+  isReversed: boolean;
 }
 
+const CategoryOverview: FunctionComponent<CategoryOverviewProps> = ({ category, isReversed }) => (
+  <div className={`${styles.categoryOverview} ${isReversed ? styles.reversed : ''}`}>
+    <div className={styles.categoryImageContainer}>
+      <img 
+        src={category.image || "/api/placeholder/600/400"} 
+        alt={category.imageAlt || "Category illustration"} 
+        className={styles.categoryImage}
+      />
+    </div>
+    <div className={styles.categoryIntro}>
+      <h2 className={styles.categoryTitle}>{category.title}</h2>
+      <div className={styles.categoryTitleLine}></div>
+      <p className={styles.categoryDescription}>{category.description}</p>
+    </div>
+  </div>
+);
 
+// Feature Card Component
+interface FeatureCardProps {
+  feature: ServiceFeature;
+}
+
+// Helper function to get the appropriate icon
+const getIconComponent = (iconName: string) => {
+  switch(iconName) {
+    case 'strategy-icon':
+      return <FiSettings size={22} />;
+    case 'product-icon':
+      return <FiCpu size={22} />;
+    case 'data-icon':
+      return <FiDatabase size={22} />;
+    case 'analytics-icon':
+      return <FiBarChart2 size={22} />;
+    case 'custom-icon':
+      return <FiCode size={22} />;
+    case 'automation-icon':
+      return <FiTrello size={22} />;
+    case 'agent-icon':
+      return <FiAward size={22} />;
+    default:
+      return <FiCpu size={22} />;
+  }
+};
+
+const FeatureCard: FunctionComponent<FeatureCardProps> = ({ feature }) => (
+  <div className={styles.featureCard}>
+    <div className={styles.featureImageWrapper}>
+      <img 
+        src={feature.image || "/api/placeholder/400/240"} 
+        alt={feature.imageAlt || "Feature illustration"} 
+        className={styles.featureImage}
+      />
+      {feature.icon && (
+        <div className={styles.featureIcon}>
+          {getIconComponent(feature.icon)}
+        </div>
+      )}
+    </div>
+    <div className={styles.featureContent}>
+      <h3 className={styles.featureTitle}>{feature.title}</h3>
+      <p className={styles.featureDescription}>{feature.description}</p>
+    </div>
+  </div>
+);
+
+// Service Category Section
+interface CategorySectionProps {
+  category: ServiceCategory;
+  index: number;
+}
+
+const CategorySection: FunctionComponent<CategorySectionProps> = ({ category, index }) => (
+  <section className={`${styles.categorySection} ${index % 2 === 0 ? styles.evenSection : styles.oddSection}`}>
+    <div className={styles.categoryContainer}>
+      <CategoryOverview 
+        category={category} 
+        isReversed={index % 2 !== 0}
+      />
+      
+      <div className={styles.featuresGrid}>
+        {category.features.map((feature, idx) => (
+          <FeatureCard key={idx} feature={feature} />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// Use Cases Component
+const UseCasesSection: FunctionComponent = () => (
+  <section className={styles.useCasesSection}>
+    <div className={styles.sectionContainer}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>{offeringData.useCases.title}</h2>
+        <p className={styles.sectionDescription}>{offeringData.useCases.description}</p>
+      </div>
+      
+      <div className={styles.useCasesGrid}>
+        {offeringData.useCases.cases.map((useCase, idx) => (
+          <div key={idx} className={styles.useCaseCard}>
+            <div className={styles.useCaseImageWrapper}>
+              <img 
+                src={useCase.image || "/api/placeholder/400/240"} 
+                alt={`${useCase.industry} use case`} 
+                className={styles.useCaseImage}
+              />
+            </div>
+            <div className={styles.useCaseContent}>
+              <h3 className={styles.useCaseIndustry}>{useCase.industry}</h3>
+              <p className={styles.useCaseDescription}>{useCase.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// Process Steps Component
+const ProcessSection: FunctionComponent = () => {
+  const { isDarkTheme } = useTheme();
+  
+  return (
+    <section className={styles.processSection}>
+      <div className={styles.sectionContainer}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>{offeringData.process.title}</h2>
+          <p className={styles.sectionDescription}>{offeringData.process.description}</p>
+        </div>
+        
+        <div className={styles.processSteps}>
+          {offeringData.process.steps.map((step, idx) => (
+            <div key={idx} className={styles.processStep}>
+              <div className={`${styles.stepNumber} ${isDarkTheme ? styles.darkThemeNumber : ''}`}>
+                <span className={styles.stepNumberText}>{idx + 1}</span>
+              </div>
+              <div className={styles.stepContent}>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+                <p className={styles.stepDescription}>{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// CTA Section
+const CTASection: FunctionComponent = () => {
+  const { isDarkTheme } = useTheme();
+  
+  return (
+    <section className={`${styles.ctaSection} ${isDarkTheme ? styles.ctaSectionDark : ''}`}>
+      <div className={styles.ctaSectionBg}></div>
+      <div className={styles.ctaContainer}>
+        <h2 className={styles.ctaTitle}>Ready to Transform Your Business?</h2>
+        <p className={styles.ctaDescription}>
+          Let's discuss how our data science expertise and AI capabilities can drive innovation and growth for your organization.
+        </p>
+        <a href="/contact-us" className={styles.ctaButton}>Schedule a Consultation</a>
+      </div>
+    </section>
+  );
+};
+
+// Main Offering Component
 const OfferingPage: FunctionComponent = () => {
-    return (
-        <section className={[styles.
-            OfferingPage].
-            join(' ')} >
-            <HeaderComponet />
-            <main className={styles.body}>
-                <PageDescription data-aos="fade-in" data-aos-duration="4000" details={offeringPageDescription} />
-                <div className="col-12">
-                    <div className="row m-0">
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <p className={styles.title}>{dataScienceDescribe.title}</p>
-                        <p className={styles.describe}>{dataScienceDescribe.describe}</p>
-                            <UnOrderListOffering list={dataScience.items} />
-                            <br />
-                        </div>
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <p className={styles.title}>{llmDescribe.title}</p>
-                            <p className={styles.describe}>{llmDescribe.describe}</p>
-                            <UnOrderListOffering list={llm.items} />
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <Footer />
-        </section>
-    );
+  const { isDarkTheme } = useTheme();
+  
+  return (
+    <div className={styles.offeringPage}>
+      <HeaderComponent />
+      
+      <main className={styles.mainContent}>
+        <HeroSection />
+        
+        {offeringData.categories.map((category, idx) => (
+          <CategorySection 
+            key={idx} 
+            category={category}
+            index={idx}
+          />
+        ))}
+        
+        <UseCasesSection />
+        <ProcessSection />
+        <CTASection />
+      </main>
+      
+      <Footer />
+    </div>
+  );
 };
 
 export default OfferingPage;

@@ -1,365 +1,137 @@
-// import React, { useState, useEffect } from 'react';
-// import { Modal, Button, Form, Input, Row, Col, message } from 'antd';
-// import PhoneInput from 'react-phone-input-2';
-// import 'react-phone-input-2/lib/style.css';
-// import 'antd/dist/reset.css';
-// import { FaBuilding } from 'react-icons/fa';
-// import { MdOutlineEmail } from "react-icons/md";
-// import { AiOutlineUser } from "react-icons/ai";
-// import { FiSend } from 'react-icons/fi';
-// import './ContactUs.css';
-// import { initializeApp } from "firebase/app";
-// import ReactGA from 'react-ga4';
-// import { getFirestore, collection, addDoc } from "firebase/firestore";
-
-// // Firebase configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBPBrchVlvkJcYosAceZ6VmfKmCkFLVsN8",
-//     authDomain: "woodfrog-c8662.firebaseapp.com",
-//     projectId: "woodfrog-c8662",
-//     storageBucket: "woodfrog-c8662.appspot.com",
-//     messagingSenderId: "732188377749",
-//     appId: "1:732188377749:web:1938736ba88c5ce1bad19c",
-//     measurementId: "G-Z23KKT3XYT"
-// };
-
-// // Initialize Firebase and Firestore
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
-
-// const { TextArea } = Input;
-
-// interface ContactFormProps {
-//     isModalVisible: boolean;
-//     setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-// const ContactForm: React.FC<ContactFormProps> = ({ isModalVisible, setIsModalVisible }) => {
-//     const [phone, setPhone] = useState('');
-//     const [loading, setLoading] = useState(false);
-//     const [form] = Form.useForm(); // Create form instance
-
-//     useEffect(() => {
-//         if (isModalVisible) {
-//             document.body.classList.add('blur-background');
-//         } else {
-//             document.body.classList.remove('blur-background');
-//         }
-
-//         return () => {
-//             document.body.classList.remove('blur-background');
-//         };
-//     }, [isModalVisible]);
-
-//     const handleOk = () => {
-//         setIsModalVisible(false);
-//     };
-
-//     const handleCancel = () => {
-//         setIsModalVisible(false);
-//     };
-
-//     const onFinish = async (values: any) => {
-//         setLoading(true);
-//         try {
-//             const docRef = await addDoc(collection(db, 'contacts'), {
-//                 firstName: values.firstName,
-//                 lastName: values.lastName,
-//                 email: values.email,
-//                 contactNumber: phone,
-//                 organisation: values.organisation,
-//                 message: values.message,
-//                 createdAt: new Date()
-//             });
-//             // console.log("Document written with ID: ", docRef.id);
-//             message.success('Thank You! Our sales team will contact you soon.');
-//             // Google Analytics event
-//             ReactGA.event({
-//                 category: 'Contact Form',
-//                 action: 'Form Submitted',
-//                 label: `Form submission by ${values.email}`
-//             });
-
-//             form.resetFields(); // Reset the form fields
-//             setPhone(''); // Reset the phone input as well
-//             setIsModalVisible(false); // Close the modal
-
-//         } catch (error) {
-//             console.error("Error adding document: ", error);
-//             message.error('Failed to submit the form');
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <Modal
-//                 title="Contact Us"
-//                 open={isModalVisible}
-//                 onOk={handleOk}
-//                 onCancel={handleCancel}
-//                 footer={null}
-//                 bodyStyle={{ color: 'white' }}
-//             >
-//                 <Form layout="vertical" className="contact-form" form={form} onFinish={onFinish}>
-//                     <Row gutter={16}>
-//                         <Col span={12}>
-//                             <Form.Item label="" name="firstName" rules={[{ required: true, message: 'Please input your first name!' }]}>
-//                                 <Input
-//                                     prefix={<AiOutlineUser />}
-//                                     placeholder="First Name"
-//                                     className="form-input"
-//                                 />
-//                             </Form.Item>
-//                         </Col>
-//                         <Col span={12}>
-//                             <Form.Item label="" name="lastName" rules={[{ required: true, message: 'Please input your last name!' }]}>
-//                                 <Input
-//                                     prefix={<AiOutlineUser />}
-//                                     placeholder="Last Name"
-//                                     className="form-input"
-//                                 />
-//                             </Form.Item>
-//                         </Col>
-//                     </Row>
-
-//                     <Form.Item
-//                         label=""
-//                         name="email"
-//                         rules={[{ required: true, type: 'email', message: 'Please enter a valid email address' }]}
-//                     >
-//                         <Input
-//                             prefix={<MdOutlineEmail size={17} />}
-//                             placeholder="Email address"
-//                             className="form-input full-width"
-//                         />
-//                     </Form.Item>
-
-//                     <Form.Item label="" name="contactNumber">
-//                         <PhoneInput
-//                             country={'in'}
-//                             value={phone}
-//                             onChange={(phone) => setPhone(phone)}
-//                             inputStyle={{ width: '100%' }}
-//                             placeholder="Contact Number"
-//                             inputClass="form-input full-width"
-//                         />
-//                     </Form.Item>
-
-//                     <Form.Item label="" name="organisation">
-//                         <Input
-//                             prefix={<FaBuilding />}
-//                             placeholder="Organisation"
-//                             className="form-input full-width"
-//                         />
-//                     </Form.Item>
-
-//                     <Form.Item label="" name="message" rules={[{ required: true, message: 'Please enter your message!' }]}>
-//                         <TextArea
-//                             placeholder="Type your message"
-//                             rows={4}
-//                             className="form-input full-width"
-//                         />
-//                     </Form.Item>
-
-//                     <Form.Item>
-//                         <Button type="primary" htmlType="submit" block className="submit-btn" loading={loading}>
-//                             <FiSend /> Submit
-//                         </Button>
-//                     </Form.Item>
-//                 </Form>
-//             </Modal>
-//         </div>
-//     );
-// };
-
-// export default ContactForm;
-
-import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form, Input, Row, Col, message } from 'antd';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-import 'antd/dist/reset.css';
-import { FaBuilding } from 'react-icons/fa';
-import { MdOutlineEmail } from "react-icons/md";
-import { AiOutlineUser } from "react-icons/ai";
-import { FiSend } from 'react-icons/fi';
-import './ContactUs.css';
-import { initializeApp } from "firebase/app";
-import ReactGA from 'react-ga4';
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBPBrchVlvkJcYosAceZ6VmfKmCkFLVsN8",
-    authDomain: "woodfrog-c8662.firebaseapp.com",
-    projectId: "woodfrog-c8662",
-    storageBucket: "woodfrog-c8662.appspot.com",
-    messagingSenderId: "732188377749",
-    appId: "1:732188377749:web:1938736ba88c5ce1bad19c",
-    measurementId: "G-Z23KKT3XYT"
-};
-
-// Initialize Firebase and Firestore
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import React from 'react';
+import { Modal, Form, Input, Button, message } from 'antd';
+import styles from './ContactUs.module.css';
+import { useTheme } from "../ThemeContext"; // Import the theme context
 
 const { TextArea } = Input;
 
 interface ContactFormProps {
-    isModalVisible: boolean;
-    setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isModalVisible: boolean;
+  setIsModalVisible: (visible: boolean) => void;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ isModalVisible, setIsModalVisible }) => {
-    const [phone, setPhone] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [form] = Form.useForm(); // Create form instance
+  const [form] = Form.useForm();
+  const { isDarkTheme } = useTheme(); // Get the current theme
 
-    // Check if the site is in dark mode by looking for a class on the body
-    // You may need to adjust this depending on how your theme switching works
-    const isDarkMode = document.body.classList.contains('dark-mode');
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    form.resetFields();
+  };
 
-    useEffect(() => {
-        if (isModalVisible) {
-            document.body.classList.add('blur-background');
-        } else {
-            document.body.classList.remove('blur-background');
-        }
+  const onFinish = (values: any) => {
+    console.log('Form values:', values);
+    message.success('Your message has been sent successfully!');
+    form.resetFields();
+    setIsModalVisible(false);
+  };
 
-        return () => {
-            document.body.classList.remove('blur-background');
-        };
-    }, [isModalVisible]);
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const onFinish = async (values: any) => {
-        setLoading(true);
-        try {
-            const docRef = await addDoc(collection(db, 'contacts'), {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                email: values.email,
-                contactNumber: phone,
-                organisation: values.organisation,
-                message: values.message,
-                createdAt: new Date()
-            });
-            
-            message.success('Thank You! Our team will contact you soon.');
-            
-            // Google Analytics event
-            ReactGA.event({
-                category: 'Contact Form',
-                action: 'Form Submitted',
-                label: `Form submission by ${values.email}`
-            });
-
-            form.resetFields(); // Reset the form fields
-            setPhone(''); // Reset the phone input as well
-            setIsModalVisible(false); // Close the modal
-
-        } catch (error) {
-            console.error("Error adding document: ", error);
-            message.error('Failed to submit the form');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <div>
-            <Modal
-                title="Let's Talk!"
-                open={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                footer={null}
-                bodyStyle={{ color: isDarkMode ? 'white' : '#333333' }}
-                className="contact-modal"
+  // Changed the title from "Contact Us" to "Let's Talk!"
+  return (
+    <Modal
+      title="Let's Talk!"
+      open={isModalVisible}
+      onCancel={handleCancel}
+      footer={null}
+      className={`${styles.contactModal} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        className={styles.form}
+      >
+        <div className="row">
+          <div className="col-md-6">
+            <Form.Item
+              name="firstName"
+              rules={[{ required: true, message: 'Please enter your first name' }]}
+              className={styles.formItem}
             >
-                <p style={{ marginBottom: '20px' }}>
-                    We'd love to hear from you. Fill out the form and we'll get back to you soon.
-                </p>
-                
-                <Form layout="vertical" className="contact-form" form={form} onFinish={onFinish}>
-                    <Row gutter={16}>
-                        <Col span={12}>
-                            <Form.Item label="" name="firstName" rules={[{ required: true, message: 'Please input your first name!' }]}>
-                                <Input
-                                    prefix={<AiOutlineUser />}
-                                    placeholder="First Name"
-                                    className="form-input"
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item label="" name="lastName" rules={[{ required: true, message: 'Please input your last name!' }]}>
-                                <Input
-                                    prefix={<AiOutlineUser />}
-                                    placeholder="Last Name"
-                                    className="form-input"
-                                />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-
-                    <Form.Item
-                        label=""
-                        name="email"
-                        rules={[{ required: true, type: 'email', message: 'Please enter a valid email address' }]}
-                    >
-                        <Input
-                            prefix={<MdOutlineEmail size={17} />}
-                            placeholder="Email address"
-                            className="form-input full-width"
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="" name="contactNumber">
-                        <PhoneInput
-                            country={'in'}
-                            value={phone}
-                            onChange={(phone) => setPhone(phone)}
-                            inputStyle={{ width: '100%' }}
-                            placeholder="Contact Number"
-                            inputClass="form-input full-width"
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="" name="organisation">
-                        <Input
-                            prefix={<FaBuilding />}
-                            placeholder="Organisation"
-                            className="form-input full-width"
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="" name="message" rules={[{ required: true, message: 'Please enter your message!' }]}>
-                        <TextArea
-                            placeholder="Type your message"
-                            rows={4}
-                            className="form-input full-width"
-                        />
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" block className="submit-btn" loading={loading}>
-                            <FiSend /> Submit
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
+              <Input 
+                prefix={<span className={styles.inputIcon}>👤</span>}
+                placeholder="First Name"
+                className={styles.input}
+              />
+            </Form.Item>
+          </div>
+          <div className="col-md-6">
+            <Form.Item
+              name="lastName"
+              rules={[{ required: true, message: 'Please enter your last name' }]}
+              className={styles.formItem}
+            >
+              <Input 
+                prefix={<span className={styles.inputIcon}>👤</span>}
+                placeholder="Last Name"
+                className={styles.input}
+              />
+            </Form.Item>
+          </div>
         </div>
-    );
+
+        <Form.Item
+          name="email"
+          rules={[
+            { required: true, message: 'Please enter your email' },
+            { type: 'email', message: 'Please enter a valid email' }
+          ]}
+          className={styles.formItem}
+        >
+          <Input 
+            prefix={<span className={styles.inputIcon}>✉️</span>}
+            placeholder="Email Address"
+            className={styles.input}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="phone"
+          rules={[{ required: true, message: 'Please enter your phone number' }]}
+          className={styles.formItem}
+        >
+          <Input 
+            prefix={<span className={styles.inputIcon}>📱</span>}
+            placeholder="Phone Number"
+            className={styles.input}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="organization"
+          className={styles.formItem}
+        >
+          <Input 
+            prefix={<span className={styles.inputIcon}>🏢</span>}
+            placeholder="Organization"
+            className={styles.input}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="message"
+          rules={[{ required: true, message: 'Please enter your message' }]}
+          className={styles.formItem}
+        >
+          <TextArea
+            placeholder="Type your message"
+            rows={4}
+            className={styles.textArea}
+          />
+        </Form.Item>
+
+        <Form.Item className={styles.submitContainer}>
+          <Button 
+            type="primary" 
+            htmlType="submit" 
+            className={styles.submitButton}
+          >
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
 };
 
 export default ContactForm;

@@ -1,169 +1,375 @@
 import { FunctionComponent } from "react";
-// import styles from "./UnOrderList.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from "./AboutUs.module.css";
 import HeaderComponet from "../components/HeaderComponent";
-import UnOrderList from "../components/UnorderList";
 import Footer from "../components/Footer";
-import PageDescription from "../components/PageDescription";
-import PageDescriptionLeftTitle from "../components/PageDescriptionLeftTitle";
-import UnOrderListOnly from "../components/UnOrderListOnly";
-import Items from "../components/Items";
-import { title } from "process";
+import { useTheme } from "../ThemeContext"; // Import your theme context
 
-const aboutUsPageDescription = {
+// TypeScript interfaces
+interface ListItem {
+  [key: string]: string;
+}
+
+interface Card {
+  title: string;
+  description: string;
+  listItems?: string[];
+  image?: string;
+  imageAlt?: string;
+}
+
+interface SubSection {
+  description: string;
+  listItems?: string[];
+}
+
+interface Section {
+  title: string;
+  description?: string;
+  listItems?: string[];
+  image?: string;
+  imageAlt?: string;
+  imagePosition: 'left' | 'right' | 'top';
+  subSection?: SubSection;
+  subSections?: SubSection[];
+  cardLayout?: boolean;
+  cards?: Card[];
+}
+
+interface Header {
+  title: string;
+  description: string;
+}
+
+interface Closing {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  imagePosition: 'left' | 'right';
+}
+
+interface AboutUsData {
+  header: Header;
+  sections: Section[];
+  closing: Closing;
+}
+
+// Content data objects
+const aboutUsData: AboutUsData = {
+  header: {
     title: 'About Us',
-    describe: `<p>Woodfrog, established in 2023 in Pune, India, is an innovative AI and Analytics firm. 
+    description: `Woodfrog, established in 2023 in Pune, India, is an innovative AI and Analytics firm. 
     With a bold vision and agile approach, we're disrupting traditional data solutions. Our team's creativity, 
     expertise, and enthusiasm enable us to craft cutting-edge solutions for data-driven decision making, 
-    serving esteemed clients across industries and cementing our position as a rising star in the data analytics.</p>`
-};
-const ourStory = {
-    title: 'Our Story',
-    describe: `<p>We began with a simple yet ambitious goal: to empower businesses to make informed decisions through data-driven insights.
-    Our founder & core team, passionate about AI and analytics, assembled a team of talented individuals who share a common vision.</p>`
-};
-const ourMission = {
-    title: 'Our Mission',
-    describe: `<p>To revolutionize data analytics by:</p>`,
-    items: [
+    serving esteemed clients across industries and cementing our position as a rising star in the data analytics.`
+  },
+  sections: [
+    {
+      title: 'Our Story',
+      description: `We began with a simple yet ambitious goal: to empower businesses to make informed decisions through data-driven insights.
+      Our founder & core team, passionate about AI and analytics, assembled a team of talented individuals who share a common vision.`,
+      image: '/images/our-story.jpg',
+      imageAlt: 'Woodfrog team collaborating',
+      imagePosition: 'right'
+    },
+    {
+      title: 'Our Mission',
+      description: `To revolutionize data analytics by:`,
+      listItems: [
         'Developing innovative AI-powered solutions',
         'Delivering actionable insights for informed decision-making',
         'Fostering long-term partnerships with our clients',
         'Cultivating a culture of continuous learning and innovation',
-    ]
-};
-
-const ourValues = {
-    title: 'Our Values',
-    // describe: `<p>To revolutionize data analytics by:</p>`,
-    items: [
+      ],
+      image: '/images/our-mission.jpg',
+      imageAlt: 'Data visualization dashboard',
+      imagePosition: 'left'
+    },
+    {
+      title: 'Our Values',
+      listItems: [
         'Customer-centricity: Your success is our priority',
         'Innovation: We continuously push boundaries',
         'Collaboration: Together, we achieve more',
         'Integrity: Transparency and ethics guide our actions',
-    ]
-};
-const ourExpertise = {
-    title: 'Our Expertise',
-    describe: `Our team of seasoned data scientists, engineers, and AI specialists leverages decades of collective experience in:`,
-    items: [
+      ],
+      image: '/images/our-values.jpg',
+      imageAlt: 'Team values illustration',
+      imagePosition: 'right'
+    },
+    {
+      title: 'Our Expertise',
+      description: `Our team of seasoned data scientists, engineers, and AI specialists leverages decades of collective experience in:`,
+      listItems: [
         'Advanced analytics: Uncovering hidden patterns and insights',
         'Data product: Crafting customizable, user-centric data solutions',
         'Data engineering: Building scalable, efficient data infrastructure',
         'Machine learning: Developing predictive models for informed decision-making',
-    ]
-};
-const ourApproach = {
-    title: 'Our Approach',
-    describe: `We believe data should be accessible, actionable, and empowering for everyone. Our customizable analytics solutions and user-centric tools enable businesses to:`,
-    items: [
+      ],
+      image: '/images/our-expertise.jpg',
+      imageAlt: 'Data analysis in progress',
+      imagePosition: 'left'
+    },
+    {
+      title: 'Our Approach',
+      description: `We believe data should be accessible, actionable, and empowering for everyone. Our customizable analytics solutions and user-centric tools enable businesses to:`,
+      listItems: [
         'Extract deep insights: Uncover hidden trends and opportunities',
         'Optimize processes: Streamline operations and enhance efficiency',
         'Anticipate future challenges: Proactively address potential obstacles',
-        'Our consultative, end-to-end approach guides clients through:',
-    ]
-};
-const ourApproach1 = {
-    // title: 'Our Approach',
-    describe: `Our consultative, end-to-end approach guides clients through:`,
-    items: [
-        // 'Our consultative, end-to-end approach guides clients through:',
-        'Data preparation: Ensuring data quality and integrity',
-        'Strategy development: Aligning data goals with business objectives',
-        'Deployment: Seamless integration with existing systems',
-        'Ongoing support: Continuous guidance and optimization'
-    ]
-};
-const ourTeam = {
-    // title: 'Our Approach',
-    describe: `Our team of seasoned data scientists, engineers, and AI specialists brings decades of experience in advanced analytics, 
-    data engineering, and machine learning. We craft customized data strategies tailored to your unique goals, 
-    from precision-driven dashboards and real-time alerts to comprehensive AI and machine learning solutions.`,
-    items: [
-    ]
-};
-
-
-/* const aboutUs = [
-    {
-        title: 'Why Woodfrog?',
-        items : [
-            {
-                title: 'Customized AI Solutions:',
-                describe: `We offer tailored AI models to solve complex challenges, from predictive maintenance and demand forecasting to customer experience enhancements and large language model (LLM) agents. Our advanced analytics deliver actionable insights that keep businesses agile in fast-changing markets.`
-            },
-            {
-                title: 'Real-Time Data Integration: ',
-                describe: `Our solutions integrate seamlessly with your existing systems, delivering real-time insights for agile decision-making.`
-            },
-            {
-                title: 'User-First Tools and Dashboards:',
-                describe: ` Our intuitive dashboards and data visualization tools make it easy for every team member to understand and utilize data insights effectively.`
-            },
+      ],
+      subSection: {
+        description: `Our consultative, end-to-end approach guides clients through:`,
+        listItems: [
+          'Data preparation: Ensuring data quality and integrity',
+          'Strategy development: Aligning data goals with business objectives',
+          'Deployment: Seamless integration with existing systems',
+          'Ongoing support: Continuous guidance and optimization'
         ]
+      },
+      image: '/images/our-approach.jpg',
+      imageAlt: 'Team consulting with clients',
+      imagePosition: 'right'
     },
-]; */
-const whyWoodFrog ={
-        title: 'Why Woodfrog?',
-        describe:`Tailored AI Solutions: Customized models addressing specific business challenges, such as:`,
-        items : [
+    {
+      title: 'Why Woodfrog?',
+      description: `Choose Woodfrog for impactful data-driven solutions:`,
+      cardLayout: true,
+      cards: [
+        {
+          title: 'Tailored AI Solutions',
+          description: 'Customized models addressing specific business challenges',
+          listItems: [
             'Predictive maintenance: Minimizing downtime and optimizing resource allocation',
             'Demand forecasting: Informing inventory management and supply chain optimization',
             'Customer experience enhancements: Personalizing interactions and improving satisfaction',
             'Large language model (LLM) agents: Revolutionizing customer support and engagement'
-        ]
-    }
-const whyWoodFrogOne ={
-         describe: 'Real-Time Insights: Seamless integration with existing systems, enabling: ',
-         items : [
+          ],
+          image: '/images/tailored-ai.jpg',
+          imageAlt: 'AI customization illustration'
+        },
+        {
+          title: 'Real-Time Insights',
+          description: 'Seamless integration with existing systems, enabling:',
+          listItems: [
             'Agile decision-making: Responding promptly to changing market conditions',
-            'Data-driven strategy: Informing business decisions with up-to-the-minute information',
-        ]
-    }
-const whyWoodFrogTwo ={
-        describe: 'Intuitive Tools: User-friendly dashboards and data visualization, facilitating:',
-        items : [
+            'Data-driven strategy: Informing business decisions with up-to-the-minute information'
+          ],
+          image: '/images/real-time-insights.jpg',
+          imageAlt: 'Real-time data dashboard'
+        },
+        {
+          title: 'Intuitive Tools',
+          description: 'User-friendly dashboards and data visualization, facilitating:',
+          listItems: [
             'Effective insights utilization: Empowering teams to make data-driven decisions',
-            'Collaborative workflow: Enhancing cross-functional communication and alignment',
-        ]
+            'Collaborative workflow: Enhancing cross-functional communication and alignment'
+          ],
+          image: '/images/intuitive-tools.jpg',
+          imageAlt: 'User-friendly interface'
+        }
+      ],
+      imagePosition: 'top'
     }
-const joinOurJourney ={
-        title: 'Join the Woodfrog Journey',
-        describe: `Discover how our cutting-edge AI and analytics solutions can transform your business. Let's collaborate to unlock data-driven growth, efficiency, and success.`,
-    }
+  ],
+  closing: {
+    title: 'Join the Woodfrog Journey',
+    description: `Discover how our cutting-edge AI and analytics solutions can transform your business. Let's collaborate to unlock data-driven growth, efficiency, and success.`,
+    image: '/images/join-woodfrog.jpg',
+    imageAlt: 'Collaboration illustration',
+    imagePosition: 'right'
+  }
+};
 
-const AboutUs: FunctionComponent = () => {
+// Component for section header with description
+interface SectionHeaderProps {
+  title: string;
+  description?: string;
+}
+
+const SectionHeader: FunctionComponent<SectionHeaderProps> = ({ title, description }) => (
+  <div className={styles.sectionHeader}>
+    <h2 className={styles.sectionTitle}>{title}</h2>
+    {description && <div className={styles.sectionDescription} dangerouslySetInnerHTML={{ __html: description }} />}
+  </div>
+);
+
+// Component for bullet list
+interface BulletListProps {
+  items: string[];
+}
+
+const BulletList: FunctionComponent<BulletListProps> = ({ items }) => (
+  <ul className={styles.bulletList}>
+    {items.map((item: string, index: number) => (
+      <li key={index} className={styles.bulletItem}>{item}</li>
+    ))}
+  </ul>
+);
+
+// Card component for "Why Woodfrog" section
+interface CardComponentProps {
+  card: Card;
+}
+
+const CardComponent: FunctionComponent<CardComponentProps> = ({ card }) => (
+  <div className={styles.card}>
+    <div className={styles.cardImageContainer}>
+      <img 
+        src={card.image || "/api/placeholder/300/200"} 
+        alt={card.imageAlt || "Feature illustration"} 
+        className={styles.cardImage}
+      />
+    </div>
+    <div className={styles.cardContent}>
+      <h3 className={styles.cardTitle}>{card.title}</h3>
+      <p className={styles.cardDescription}>{card.description}</p>
+      {card.listItems && <BulletList items={card.listItems} />}
+    </div>
+  </div>
+);
+
+// Card grid component
+interface CardGridProps {
+  cards: Card[];
+}
+
+const CardGrid: FunctionComponent<CardGridProps> = ({ cards }) => (
+  <div className={styles.cardGrid}>
+    {cards.map((card: Card, idx: number) => (
+      <CardComponent key={idx} card={card} />
+    ))}
+  </div>
+);
+
+// Component for alternating content sections
+interface ContentSectionProps {
+  section: Section;
+  index: number;
+}
+
+const ContentSection: FunctionComponent<ContentSectionProps> = ({ section, index }) => {
+  const isImageLeft = section.imagePosition === 'left';
+  
+  // For card layout sections (Why Woodfrog)
+  if (section.cardLayout && section.cards) {
     return (
-        <section className={[styles.AboutUs].join(' ')} >
-            <HeaderComponet />
-            <main  className={styles.body}>
-                <PageDescription details={aboutUsPageDescription}/>
-                <PageDescriptionLeftTitle details={ourStory}/>
-                <PageDescriptionLeftTitle details={ourMission}/>
-                <UnOrderListOnly list={ourMission.items} />
-                <PageDescriptionLeftTitle details={ourValues}/>
-                <UnOrderListOnly list={ourValues.items}/>
-                <PageDescriptionLeftTitle details={ourExpertise}/>
-                <UnOrderListOnly list={ourExpertise.items}/>
-                <PageDescriptionLeftTitle details={ourApproach}/>
-                <UnOrderListOnly list={ourApproach.items}/>
-                <PageDescriptionLeftTitle details={ourApproach1}/>
-                <UnOrderListOnly list={ourApproach1.items}/>
-                <PageDescriptionLeftTitle details={ourTeam}/>
-                <PageDescriptionLeftTitle details={{title: '', describe: '', items: []}}/>
-                <PageDescriptionLeftTitle details={whyWoodFrog}/>
-                <UnOrderListOnly list={whyWoodFrog.items}/>
-                <PageDescriptionLeftTitle details={whyWoodFrogOne}/>
-                <UnOrderListOnly list={whyWoodFrogOne.items}/>
-                <PageDescriptionLeftTitle details={whyWoodFrogTwo}/>
-                <UnOrderListOnly list={whyWoodFrogTwo.items}/>
-                <PageDescriptionLeftTitle details={joinOurJourney}/>
-                
-            </main>
-            <Footer />
-        </section>
+      <section className={`${styles.contentSection} ${index % 2 === 0 ? styles.bgLight : styles.bgFaint}`}>
+        <div className={styles.sectionContainer}>
+          <div className={styles.fullWidthContent}>
+            <SectionHeader title={section.title} description={section.description} />
+            <CardGrid cards={section.cards} />
+          </div>
+        </div>
+      </section>
     );
+  }
+  
+  // For standard alternate layout sections
+  return (
+    <section className={`${styles.contentSection} ${index % 2 === 0 ? styles.bgLight : styles.bgFaint}`}>
+      <div className={`${styles.sectionContainer} ${isImageLeft ? styles.imageLeft : styles.imageRight}`}>
+        <div className={styles.textContent}>
+          <SectionHeader title={section.title} description={section.description} />
+          
+          {section.listItems && <BulletList items={section.listItems} />}
+          
+          {section.subSection && (
+            <div className={styles.subSection}>
+              <div className={styles.subSectionDescription} dangerouslySetInnerHTML={{ __html: section.subSection.description }} />
+              {section.subSection.listItems && <BulletList items={section.subSection.listItems} />}
+            </div>
+          )}
+          
+          {section.subSections && section.subSections.map((subSection: SubSection, idx: number) => (
+            <div key={idx} className={styles.subSection}>
+              <div className={styles.subSectionDescription} dangerouslySetInnerHTML={{ __html: subSection.description }} />
+              {subSection.listItems && <BulletList items={subSection.listItems} />}
+            </div>
+          ))}
+        </div>
+        
+        <div className={styles.imageContent}>
+          {/* Use an image placeholder if you don't have the actual image */}
+          <div className={styles.imagePlaceholder}>
+            <img 
+              src={section.image || "/api/placeholder/500/320"} 
+              alt={section.imageAlt || "Placeholder image"} 
+              className={styles.sectionImage}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Main hero section component
+interface HeroSectionProps {
+  header: Header;
+}
+
+const HeroSection: FunctionComponent<HeroSectionProps> = ({ header }) => (
+  <section className={styles.heroSection}>
+    <div className={styles.heroContainer}>
+      <h1 className={styles.heroTitle}>{header.title}</h1>
+      <div className={styles.heroDescription} dangerouslySetInnerHTML={{ __html: header.description }} />
+    </div>
+  </section>
+);
+
+// Closing section component
+interface ClosingSectionProps {
+  closing: Closing;
+}
+
+const ClosingSection: FunctionComponent<ClosingSectionProps> = ({ closing }) => (
+  <section className={styles.closingSection}>
+    <div className={`${styles.sectionContainer} ${closing.imagePosition === 'left' ? styles.imageLeft : styles.imageRight}`}>
+      <div className={styles.textContent}>
+        <SectionHeader title={closing.title} description={closing.description} />
+        <div className={styles.ctaContainer}>
+          <a href="/contact-us" className={styles.ctaButton}>Let's Talk!</a>
+        </div>
+      </div>
+      
+      <div className={styles.imageContent}>
+        <div className={styles.imagePlaceholder}>
+          <img 
+            src={closing.image || "/api/placeholder/500/320"} 
+            alt={closing.imageAlt || "Placeholder image"} 
+            className={styles.sectionImage}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// Main About Us component
+const AboutUs: FunctionComponent = () => {
+  // We still use the ThemeContext but don't need to apply any special classes
+  // The theme variables are already set at the document level by your ThemeContext
+  const { isDarkTheme } = useTheme();
+  
+  return (
+    <div className={styles.aboutUsPage}>
+      <HeaderComponet />
+      
+      <main className={styles.mainContent}>
+        <HeroSection header={aboutUsData.header} />
+        
+        {aboutUsData.sections.map((section: Section, index: number) => (
+          <ContentSection key={index} section={section} index={index} />
+        ))}
+        
+        <ClosingSection closing={aboutUsData.closing} />
+      </main>
+      
+      <Footer />
+    </div>
+  );
 };
 
 export default AboutUs;

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import styles from './InlineContactForm.module.css';
+import { useTheme } from "../ThemeContext"; // Import the theme context
 
 const { TextArea } = Input;
 
 const InlineContactForm: React.FC = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const { isDarkTheme } = useTheme(); // Get the current theme
 
   const onFinish = (values: any) => {
     setLoading(true);
@@ -21,7 +23,7 @@ const InlineContactForm: React.FC = () => {
   };
 
   return (
-    <div className={styles.formContainer}>
+    <div className={`${styles.formContainer} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <Form
         form={form}
         layout="vertical"
