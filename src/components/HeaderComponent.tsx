@@ -26,6 +26,9 @@ const HeaderComponet: FunctionComponent<FrameComponentType> = ({
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   
+  // State for showing shadow when scrolled
+  const [isScrolled, setIsScrolled] = useState(false);
+  
   // Use useRef to store the header element for calculating height
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -57,6 +60,9 @@ const HeaderComponet: FunctionComponent<FrameComponentType> = ({
       
       setIsVisible(isScrollingUp || isAtTop || isNotScrolling);
       setPrevScrollPos(currentScrollPos);
+      
+      // Update shadow state based on scroll position
+      setIsScrolled(currentScrollPos > 10);
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -71,7 +77,7 @@ const HeaderComponet: FunctionComponent<FrameComponentType> = ({
     <>
       <div className={[styles.frameParent, className].join(" ")}>
         <header 
-          className={styles.logoContainerWrapper} 
+          className={`${styles.logoContainerWrapper} ${isScrolled ? styles.scrolledHeader : ''}`} 
           ref={headerRef}
           style={{ 
             transform: isVisible ? 'translateY(0)' : 'translateY(-100%)'

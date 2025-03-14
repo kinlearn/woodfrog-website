@@ -74,10 +74,14 @@
   color: var(--color-silver-100);
   font-family: var(--font-avenir);
   box-sizing: border-box;
-  transition: transform 0.3s ease; /* Add transition for smooth animation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth animation */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0); /* Transparent shadow by default */
 }
 
-/* Removed the Contact Us button styles as it's now part of the regular navigation */
+/* Add shadow when scrolled */
+.scrolledHeader {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow appears when scrolled */
+}
 
 /* Ensure ModeToggle and other elements are aligned */
 .navbarActions {

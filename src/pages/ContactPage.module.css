@@ -1,3 +1,5 @@
+/* Contact Page - Hero Section Consistency */
+
 .ContactPage {
   display: flex;
   flex-direction: column;
@@ -18,20 +20,31 @@
   text-align: center;
 }
 
-/* Use :global to target the title element inside PageDescription component */
-.pageDescriptionWrapper :global(h1) {
-  font-size: 2rem;
+/* Hero Section Styles */
+.heroSection {
+  padding: 80px 0;
+  background-color: var(--color-gray-200);
+  text-align: center;
+}
+
+.heroContainer {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 20px;
   color: var(--dark-primary-text);
   position: relative;
-  padding-bottom: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
   display: inline-block;
 }
 
-/* Add the underline accent to the page title */
-.pageDescriptionWrapper :global(h1)::after {
+.heroTitle::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -39,7 +52,17 @@
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, #1890FF, rgba(24, 144, 255, 0.5));
+  background: linear-gradient(to right, #1668DC, rgba(22, 104, 220, 0.5));
+  border-radius: 2px;
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--dark-secondary-text);
+  max-width: 800px;
+  margin: 0 auto;
+  font-weight: 400;
 }
 
 .contactSection {
@@ -62,10 +85,7 @@
   color: var(--dark-primary-text);
   position: relative;
   padding-bottom: 15px;
-  
   font-size: 2rem;
-  font-weight: 600;
-  color: var(--dark-primary-text);
 }
 
 .sectionTitle::after {
@@ -137,64 +157,4 @@
 .contactValue {
   color: var(--dark-secondary-text);
   font-size: 16px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-  .contactSection {
-    padding: 2rem;
-  }
-  
-  .sectionTitle {
-    font-size: 1.8rem;
-  }
-  
-  .pageDescriptionWrapper :global(h1) {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .body {
-    padding: 30px 15px 50px;
-  }
-  
-  .contactSection {
-    padding: 1.75rem;
-    margin-bottom: 25px;
-  }
-}
-
-@media (max-width: 576px) {
-  .contactSection {
-    padding: 1.5rem;
-  }
-  
-  .sectionTitle {
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  
-  .pageDescriptionWrapper :global(h1) {
-    font-size: 1.5rem;
-  }
-  
-  .contactInfoList {
-    gap: 1.75rem;
-    margin-top: 2rem;
-  }
-  
-  .contactIconWrapper {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-  }
-  
-  .contactLabel {
-    font-size: 16px;
-  }
-  
-  .contactValue {
-    font-size: 15px;
-  }
 }
