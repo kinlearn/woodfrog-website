@@ -42,12 +42,18 @@
   }
   
   .heroTitle {
-    font-size: 42px;
+    /* font-size: 42px;
     font-weight: 700;
     margin-bottom: 20px;
     color: #4e4e4e;
     position: relative;
     display: inline-block;
+    transition: color 0.3s ease; */
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--dark-primary-text);
+    line-height: 1.2;
     transition: color 0.3s ease;
   }
   

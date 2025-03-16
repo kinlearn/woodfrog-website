@@ -1,14 +1,17 @@
 import { FunctionComponent } from "react";
-import Search from "./Search";
 import styles from "./FrameComponent2.module.css";
 import Searchbar from "./Searchbar";
 
 export type FrameComponent2Type = {
   className?: string;
+  onSearch: (query: string) => void;
+  searchQuery: string;
 };
 
 const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
   className = "",
+  onSearch,
+  searchQuery
 }) => {
   return (
     <section className={[styles.mainContentWrapper, className].join(" ")}>
@@ -25,9 +28,8 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
             landscape.
           </div>
         </div>
-        {/* <Search /> */}
       </div>
-      <Searchbar/>
+      <Searchbar onSearch={onSearch} searchQuery={searchQuery} />
     </section>
   );
 };

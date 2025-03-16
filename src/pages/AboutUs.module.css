@@ -11,32 +11,6 @@
   width: 100%;
 }
 
-/* Hero section styles */
-.heroSection {
-  padding: 80px 0;
-  background-color: var(--color-gray-200);
-  text-align: center;
-}
-
-.heroContainer {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.heroTitle {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  font-weight: 700;
-  color: var(--dark-primary-text);
-}
-
-.heroDescription {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--dark-secondary-text);
-}
-
 /* Content section styles */
 .contentSection {
   padding: 80px 0;
@@ -102,7 +76,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, #1668DC, rgba(22, 104, 220, 0.5));
+  background: linear-gradient(to right, #117afa, rgba(17, 122, 250, 0.5));
 }
 
 .sectionDescription {
@@ -136,7 +110,7 @@
   height: 12px;
   background-color: transparent;
   clip-path: polygon(0 0, 0 100%, 100% 50%);
-  background-color: #1668DC;
+  background-color: #117afa;
 }
 
 .subSection {
@@ -248,7 +222,7 @@
 /* Closing section styles */
 .closingSection {
   padding: 80px 0;
-  background: linear-gradient(to right, var(--color-gray-200), rgba(22, 104, 220, 0.1));
+  background: linear-gradient(to right, var(--color-gray-200), rgba(17, 122, 250, 0.1));
 }
 
 .ctaContainer {
@@ -256,7 +230,7 @@
 }
 
 .ctaButton {
-  background-color: #1668DC;
+  background-color: #117afa;
   color: white;
   border: none;
   padding: 12px 30px;
@@ -265,7 +239,7 @@
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(22, 104, 220, 0.25);
+  box-shadow: 0 4px 6px rgba(17, 122, 250, 0.25);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-decoration: none;
@@ -273,9 +247,9 @@
 }
 
 .ctaButton:hover {
-  background-color: #2378e8;
+  background-color: #3990fa;
   transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(22, 104, 220, 0.3);
+  box-shadow: 0 6px 8px rgba(17, 122, 250, 0.3);
   text-decoration: none;
   color: white;
 }
@@ -295,10 +269,6 @@
     order: 2;
   }
   
-  .heroTitle {
-    font-size: 2rem;
-  }
-  
   .sectionTitle {
     font-size: 1.8rem;
   }
@@ -315,21 +285,15 @@
 }
 
 @media (max-width: 576px) {
-  .heroSection, 
   .contentSection,
   .closingSection {
     padding: 50px 0;
-  }
-  
-  .heroTitle {
-    font-size: 1.8rem;
   }
   
   .sectionTitle {
     font-size: 1.5rem;
   }
   
-  .heroDescription,
   .sectionDescription,
   .subSectionDescription {
     font-size: 1rem;

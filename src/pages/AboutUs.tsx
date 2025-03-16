@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import styles from "./AboutUs.module.css";
 import HeaderComponet from "../components/HeaderComponent";
 import Footer from "../components/Footer";
-import { useTheme } from "../ThemeContext"; // Import your theme context
+import PageHero from "../components/PageHero";
+import { useTheme } from "../ThemeContext";
+
 
 // TypeScript interfaces
 interface ListItem {
@@ -305,20 +307,6 @@ const ContentSection: FunctionComponent<ContentSectionProps> = ({ section, index
   );
 };
 
-// Main hero section component
-interface HeroSectionProps {
-  header: Header;
-}
-
-const HeroSection: FunctionComponent<HeroSectionProps> = ({ header }) => (
-  <section className={styles.heroSection}>
-    <div className={styles.heroContainer}>
-      <h1 className={styles.heroTitle}>{header.title}</h1>
-      <div className={styles.heroDescription} dangerouslySetInnerHTML={{ __html: header.description }} />
-    </div>
-  </section>
-);
-
 // Closing section component
 interface ClosingSectionProps {
   closing: Closing;
@@ -358,7 +346,10 @@ const AboutUs: FunctionComponent = () => {
       <HeaderComponet />
       
       <main className={styles.mainContent}>
-        <HeroSection header={aboutUsData.header} />
+        <PageHero
+          title={aboutUsData.header.title}
+          description={aboutUsData.header.description}
+        />
         
         {aboutUsData.sections.map((section: Section, index: number) => (
           <ContentSection key={index} section={section} index={index} />
@@ -373,3 +364,55 @@ const AboutUs: FunctionComponent = () => {
 };
 
 export default AboutUs;
+  // return (
+  //   <div className={styles.aboutUsPage}>
+  //     <HeaderComponet />
+      
+  //     <main className={styles.mainContent}>
+  //       {/* Hero section that exactly matches the blog styling */}
+  //       <div style={{
+  //         width: '100%',
+  //         padding: '80px 0 40px',
+  //         backgroundColor: 'var(--color-gray-200)',
+  //         display: 'flex',
+  //         justifyContent: 'center',
+  //         alignItems: 'center'
+  //       }}>
+  //         <div style={{
+  //           maxWidth: '900px',
+  //           margin: '0 auto',
+  //           padding: '0 20px',
+  //           textAlign: 'center'
+  //         }}>
+  //           <h1 style={{
+  //             fontSize: '2.5rem',
+  //             fontWeight: 700,
+  //             marginBottom: '16px',
+  //             color: 'var(--dark-primary-text)',
+  //             lineHeight: 1.2
+  //           }}>{aboutUsData.header.title}</h1>
+  //           <p style={{
+  //             fontSize: '1rem',
+  //             lineHeight: 1.6,
+  //             color: 'var(--dark-secondary-text)',
+  //             maxWidth: '800px',
+  //             margin: '0 auto'
+  //           }}>
+  //             {aboutUsData.header.description}
+  //           </p>
+  //         </div>
+  //       </div>
+        
+  //       {aboutUsData.sections.map((section: Section, index: number) => (
+  //         <ContentSection key={index} section={section} index={index} />
+  //       ))}
+        
+  //       <ClosingSection closing={aboutUsData.closing} />
+  //     </main>
+      
+  //     <Footer />
+  //   </div>
+  // );
+// };
+
+// export default AboutUs;

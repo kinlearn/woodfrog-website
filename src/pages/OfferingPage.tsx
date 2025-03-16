@@ -4,6 +4,7 @@ import styles from "./OfferingPage.module.css";
 import HeaderComponent from "../components/HeaderComponent";
 import Footer from "../components/Footer";
 import { useTheme } from "../ThemeContext";
+import PageHero from "../components/PageHero";
 import { FiSettings, FiCpu, FiDatabase, FiBarChart2, FiCode, FiTrello, FiAward } from "react-icons/fi";
 
 // TypeScript interfaces for type safety
@@ -161,13 +162,12 @@ const HeroSection: FunctionComponent = () => {
   const { isDarkTheme } = useTheme();
   
   return (
-    <section className={styles.heroSection}>
-      <div className={styles.heroPattern} style={{backgroundImage: `url(${offeringData.hero.backgroundImage})`}}></div>
-      <div className={styles.heroContainer}>
-        <h1 className={`${styles.heroTitle} ${isDarkTheme ? styles.darkThemeHeading : ''}`}>{offeringData.hero.title}</h1>
-        <p className={styles.heroDescription}>{offeringData.hero.description}</p>
-      </div>
-    </section>
+    <PageHero
+      title="Unlock the Power of Data & AI"
+      description="Woodfrog provides cutting-edge data science and AI solutions that transform raw information into strategic business advantages."
+      large={true}
+      // blueAccent={true}
+    />
   );
 };
 

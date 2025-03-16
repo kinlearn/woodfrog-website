@@ -92,7 +92,7 @@
 
 /* Space added to account for fixed header */
 .headerSpacer {
-  height: 60px; /* Match the height of your header */
+  height: 80px; /* Must match the header height */
   width: 100%;
 }
 
@@ -378,6 +378,8 @@
   
   /* Maintain alignment for mobile menu */
   .logoContainer {
+    height: 80px; /* Standardized height */
+  display: flex;
     align-items: center; /* For mobile, center alignment is better */
   }
 }
