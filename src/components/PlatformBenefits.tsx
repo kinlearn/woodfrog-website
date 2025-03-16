@@ -1,9 +1,13 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-// import Items from "./Items";
 import styles from "./PlatformBenefits.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import CountUp from 'react-countup';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { cleanupAnimations } from "../utils/animation";
+
+// Register the ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export type PlatformBenefitsType = {
   className?: string;
@@ -16,6 +20,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
   const [countdown, setCountdown] = useState(false);
   const sectionRef = useRef(null);
   const ourStrengthsRef = useRef<HTMLHeadingElement>(null);
+  const animationContext = useRef<gsap.Context | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,19 +47,60 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
 
   useEffect(() => {
     if (ourStrengthsRef.current) {
-      gsap.from(ourStrengthsRef.current, {
-        scrollTrigger: {
-          trigger: ourStrengthsRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1.5,
-        ease: "power3.out",
+      // Create a context for better cleanup
+      animationContext.current = gsap.context(() => {
+        // Use fromTo instead of from to explicitly set starting values
+        gsap.fromTo(
+          ourStrengthsRef.current, 
+          { 
+            opacity: 0.3, // Start with partial opacity to prevent complete disappearance
+            y: 50 
+          },
+          {
+            scrollTrigger: {
+              trigger: ourStrengthsRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: true,
+              // Don't toggle actions that could make elements disappear
+              toggleActions: "play none none none"
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            ease: "power3.out"
+          }
+        );
+        
+        // Add animation for boxes with a slight stagger
+        gsap.fromTo(
+          `.${styles.box}, .${styles.smallBox}`,
+          { 
+            opacity: 0.3,
+            y: 20
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 70%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
       });
     }
+
+    // Clean up all animations when component unmounts
+    return () => {
+      if (animationContext.current) {
+        cleanupAnimations(animationContext.current);
+      }
+    };
   }, []);
 
   return (
@@ -86,7 +132,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.box, styles.borderRight].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={10} duration={3} suffix="x" />
+                    <CountUp end={10} duration={2} suffix="x" />
                   ) : "10x"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Faster Data Processing & Analytics</div>
@@ -96,7 +142,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.box, styles.borderBottom].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={30} duration={3} prefix=">" suffix="%" />
+                    <CountUp end={30} duration={2} prefix=">" suffix="%" />
                   ) : ">30%"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Reduce Infrastructure Costs</div>
@@ -106,7 +152,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.box, styles.borderTop].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={90} duration={3} prefix="+" suffix="%" />
+                    <CountUp end={90} duration={2} prefix="+" suffix="%" />
                   ) : "+90%"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Improvement in Decision-Making Speed</div>
@@ -116,7 +162,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.box, styles.borderLeft].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={99.9} duration={3} prefix="+" suffix="%" decimals={1} />
+                    <CountUp end={99.9} duration={2} prefix="+" suffix="%" decimals={1} />
                   ) : "+99.9%"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Achieve near-perfect data Accuracy</div>
@@ -132,7 +178,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.smallBox].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={10} duration={3} suffix="x" />
+                    <CountUp end={10} duration={2} suffix="x" />
                   ) : "10x"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Faster Data Processing & Analytics</div>
@@ -142,7 +188,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.smallBox].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={30} duration={3} prefix=">" suffix="%" />
+                    <CountUp end={30} duration={2} prefix=">" suffix="%" />
                   ) : ">30%"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Reduce Infrastructure Costs</div>
@@ -152,7 +198,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.smallBox].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={90} duration={3} prefix="+" suffix="%" />
+                    <CountUp end={90} duration={2} prefix="+" suffix="%" />
                   ) : "+90%"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Improvement in Decision-Making Speed</div>
@@ -162,7 +208,7 @@ const PlatformBenefits: FunctionComponent<PlatformBenefitsType> = ({
               <div className={[styles.smallBox].join(' ')}>
                 <div className={[styles.boxTitle].join(' ')}>
                   {isVisible && countdown ? (
-                    <CountUp end={99.9} duration={3} prefix="+" suffix="%" decimals={1} />
+                    <CountUp end={99.9} duration={2} prefix="+" suffix="%" decimals={1} />
                   ) : "+99.9%"}
                 </div>
                 <div className={[styles.boxContent].join(' ')}>Achieve near-perfect data Accuracy</div>

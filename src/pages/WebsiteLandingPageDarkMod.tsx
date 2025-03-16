@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import FrameComponent from "../components/FrameComponent";
 import ServicesContent from "../components/ServicesContent";
 import TrustedBy from "../components/TrustedBy";
@@ -8,53 +8,170 @@ import Pricing from "../components/Pricing";
 import Pricing1 from "../components/Pricing1";
 import styles from "./WebsiteLandingPageDarkMod.module.css";
 import { useTheme } from "../ThemeContext";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import OptimizedImage from "../components/OptimizedImage";
+import { initializeAnimations, cleanupAnimations } from "../utils/animation";
+import gsap from "gsap";
 
 const WebsiteLandingPageDarkMod: FunctionComponent = () => {
   const { isDarkTheme } = useTheme(); // Get the current theme state
-  console.log("isDarkTheme", isDarkTheme)
-
+  const animationContext = useRef<gsap.Context | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const heroGraphicRef = useRef<HTMLDivElement | null>(null);
+  
+  // Initialize animations once on component mount
   useEffect(() => {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-      gsap.from(img, {
-        duration: 1.2,
-        scale: 0.8,
-        opacity: 0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: img,
+    // Small delay to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      // Initialize content animations
+      animationContext.current = initializeAnimations(
+        '.animate-on-scroll', 
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out"
+        },
+        {
           start: "top 85%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none none" // Never reverse animations
         }
-      });
-    });
-  }, [isDarkTheme]);
+      );
+      
+      // Animate the hero image with GSAP
+      if (imageRef.current) {
+        // Start with image invisible
+        gsap.set(imageRef.current, { 
+          opacity: 0,
+          y: 40,
+          scale: 0.95
+        });
+        
+        // Animate the hero image in
+        gsap.to(imageRef.current, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.2,
+          delay: 0.3,
+          ease: "power3.out"
+        });
+      }
+      
+      // Animate the hero graphic glow
+      if (heroGraphicRef.current) {
+        gsap.fromTo(heroGraphicRef.current, 
+          { 
+            opacity: 0,
+            scale: 0.8 
+          },
+          { 
+            opacity: 1,
+            scale: 1,
+            duration: 1.5,
+            delay: 0.5,
+            ease: "power2.out"
+          }
+        );
+      }
+      
+    }, 100);
+    
+    // Create subtle floating animation for the dashboard image
+    const floatAnimation = () => {
+      if (imageRef.current) {
+        gsap.to(imageRef.current, {
+          y: "+=10",
+          duration: 2,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 1.5
+        });
+      }
+      
+      if (heroGraphicRef.current) {
+        gsap.to(heroGraphicRef.current, {
+          scale: 1.05,
+          opacity: 0.9,
+          duration: 3,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 2
+        });
+      }
+    };
+    
+    // Start floating animation after initial entrance
+    const floatTimer = setTimeout(floatAnimation, 1600);
+    
+    // Cleanup function
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(floatTimer);
+      if (animationContext.current) {
+        cleanupAnimations(animationContext.current);
+      }
+      
+      // Kill all GSAP animations for cleaned up elements
+      if (imageRef.current) {
+        gsap.killTweensOf(imageRef.current);
+      }
+      if (heroGraphicRef.current) {
+        gsap.killTweensOf(heroGraphicRef.current);
+      }
+    };
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <div className={styles.websiteLandingPageDarkMod}>
       <FrameComponent />
-      <img
-        className={styles.image17Icon}
-        // loading="lazy"
-        alt=""
-        src={isDarkTheme ? "/image_17.svg" : '/image_20.svg'}
-      />
+      
+      {/* Use OptimizedImage instead of regular img but add ref for animation */}
+      <div className={styles.imageContainer}>
+        <OptimizedImage
+          ref={imageRef}
+          src={isDarkTheme ? "/image_17.svg" : '/image_20.svg'}
+          alt="Dashboard visualization"
+          className={styles.image17Icon}
+          animate={false} // We're handling animation with GSAP instead
+        />
+      </div>
+      
       <div className={styles.heroGraphic}>
-        <div className={styles.heroGraphicChild} />
+        <div 
+          ref={heroGraphicRef}
+          className={styles.heroGraphicChild} 
+        />
         <div className={styles.heroImage}></div>
       </div>
+      
       <main className={styles.services}>
-        <ServicesContent />
-        <TrustedBy />
-        <PlatformBenefits />
-        {/* <Testimonials /> */}
-        <PlatformBenefits1 />
-        <Pricing />
-        <Pricing1 />
+        {/* Add animate-on-scroll class to components you want to animate */}
+        <div className="animate-on-scroll">
+          <ServicesContent />
+        </div>
+        
+        <div className="animate-on-scroll">
+          <TrustedBy />
+        </div>
+        
+        <div className="animate-on-scroll">
+          <PlatformBenefits />
+        </div>
+        
+        <div className="animate-on-scroll">
+          <PlatformBenefits1 />
+        </div>
+        
+        <div className="animate-on-scroll">
+          <Pricing />
+        </div>
+        
+        <div className="animate-on-scroll">
+          <Pricing1 />
+        </div>
       </main>
     </div>
   );

@@ -28,6 +28,7 @@ import SmartMonitoringView from "./components/pdf/SmartMonitoringView";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy"; // ✅ Import Privacy Policy Page
 import ContactPage from "./pages/ContactPage"; // ✅ Import the Contact Page
+import NotFound from "./pages/NotFound";
 import { useTheme } from "./ThemeContext"; // Import useTheme hook
 
 // Add ThemeRouteListener component to prevent theme flickering during navigation
@@ -98,38 +99,33 @@ function App() {
   
 
   useEffect(() => {
-    let title = "";
-    let metaDescription = "";
+  // Set a consistent title across all pages
+  document.title = "woodfrog";
+  
+  // Still handle meta description if needed
+  let metaDescription = "";
+  
+  switch (pathname) {
+    case "/":
+      metaDescription = "Welcome to Woodfrog Tech.";
+      break;
+    case "/websitelanding-page-dark-mode":
+      metaDescription = "Experience our website in dark mode.";
+      break;
+    case "/contact-us":
+      metaDescription = "Get in touch with the Woodfrog Tech team.";
+      break;
+  }
 
-    switch (pathname) {
-      case "/":
-        title = "Home | Woodfrog Tech";
-        metaDescription = "Welcome to Woodfrog Tech.";
-        break;
-      case "/websitelanding-page-dark-mode":
-        title = "Dark Mode | Woodfrog Tech";
-        metaDescription = "Experience our website in dark mode.";
-        break;
-      // ✅ Add metadata for contact page
-      case "/contact-us":
-        title = "Contact Us | Woodfrog Tech";
-        metaDescription = "Get in touch with the Woodfrog Tech team.";
-        break;
+  if (metaDescription) {
+    const metaDescriptionTag: HTMLMetaElement | null = document.querySelector(
+      'head > meta[name="description"]'
+    );
+    if (metaDescriptionTag) {
+      metaDescriptionTag.content = metaDescription;
     }
-
-    if (title) {
-      document.title = title;
-    }
-
-    if (metaDescription) {
-      const metaDescriptionTag: HTMLMetaElement | null = document.querySelector(
-        'head > meta[name="description"]'
-      );
-      if (metaDescriptionTag) {
-        metaDescriptionTag.content = metaDescription;
-      }
-    }
-  }, [pathname]);
+  }
+}, [pathname]);
 
   return (
     <>
@@ -161,6 +157,7 @@ function App() {
       
       {/* ✅ Add new route for Contact Us page */}
       <Route path="/contact-us" element={<ContactPage />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
     <StickyTalkButton />
     </>

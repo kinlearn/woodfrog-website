@@ -8,6 +8,7 @@ import "./Common.css";
 import "bootstrap/dist/css/bootstrap.css";
 import HeaderComponet from "../HeaderComponent";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "../Footer";
 import { useTheme } from "../../ThemeContext";
 const { Title, Paragraph } = Typography;
 export type HorizontalTabsType = {
@@ -167,6 +168,7 @@ const CustomerChurn: FunctionComponent<HorizontalTabsType> = ({
     const BackLogo = isDarkTheme ? '/back-arrow.svg' : '/back-arrow-light.svg';
 
     return (
+        <>
         <div className={styles.blogPage}>
             <HeaderComponet />
             <div className={styles.horizontalTabsParent}>
@@ -271,6 +273,8 @@ const CustomerChurn: FunctionComponent<HorizontalTabsType> = ({
                 </div>
             </div>
         </div>
+        <Footer />
+    </>
     );
 };
 

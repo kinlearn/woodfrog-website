@@ -7,6 +7,7 @@ import PlatformBenefits1 from "../PlatformBenefits1";
 import "./Common.css";
 import "bootstrap/dist/css/bootstrap.css";
 import HeaderComponet from "../HeaderComponent";
+import Footer from "../Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../ThemeContext";
 const { Title, Paragraph } = Typography;
@@ -253,6 +254,7 @@ const DemandForecasting: FunctionComponent<HorizontalTabsType> = ({
     ];
 
     return (
+        <>
         <div className={styles.blogPage}>
             <HeaderComponet />
             <div className={styles.horizontalTabsParent}>
@@ -357,6 +359,8 @@ const DemandForecasting: FunctionComponent<HorizontalTabsType> = ({
                 </div>
             </div>
         </div>
+        <Footer />
+    </>
     );
 };
 

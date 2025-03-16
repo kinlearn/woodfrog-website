@@ -1,14 +1,17 @@
+.imageContainer {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
 .heroGraphicChild {
-  /* height: 871px;
-  width: 963px;
-  position: absolute;
-  margin: 0 !important;
-  top: -168px;
-  left: 238px;
-  filter: blur(200px);
-  border-radius: 50%;
-  background: linear-gradient(179.99deg, rgba(206, 113, 49, 0.15), #ce7131);
-  z-index: 2; */
   height: 300px;
   width: 750px;
   position: relative;
@@ -17,17 +20,21 @@
   border-radius: 50%;
   background: linear-gradient(179.99deg, rgba(206, 113, 49, 0.15), #ce7131);
   z-index: 1;
+  will-change: transform, opacity;
 }
+
 .image17Icon {
   position: relative;
   max-height: 100%;
   object-fit: cover;
   width: 100%;
-  /* max-width: 80%; */
-  /* margin: 0% 10% 0px 10%; */
   padding: var(--padding-61xl) var(--padding-101xl);
-
   z-index: 2;
+  transform-origin: center;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .heroImage {
@@ -43,13 +50,14 @@
   max-width: 100%;
   z-index: 3;
 }
+
 .heroGraphic,
 .services,
 .websiteLandingPageDarkMod {
-  /* display: flex; */
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .heroGraphic {
   width: 100%;
   margin: 0 !important;
@@ -59,34 +67,25 @@
   flex-direction: row;
   max-width: 100%;
 }
+
 .services,
 .websiteLandingPageDarkMod {
   flex-direction: column;
 }
+
 .services {
   align-self: stretch;
   max-width: 100%;
   background-color: var(--color-gray-200);
 }
+
 .websiteLandingPageDarkMod {
   width: 100%;
   position: relative;
-  /* background-color: var(--dark-primary-text); */
   background-color: var(--color-gray-200);
   overflow: hidden;
-  /* gap: 358px; */
   line-height: normal;
   letter-spacing: normal;
-}
-@media screen and (max-width: 825px) {
-  .websiteLandingPageDarkMod {
-    gap: 366px;
-  }
-}
-@media screen and (max-width: 450px) {
-  .websiteLandingPageDarkMod {
-    gap: 183px;
-  }
 }
 
 .imageBackground {
@@ -155,6 +154,15 @@
   }
 }
 
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
+/* Shadow pulsing animation for the hero image */
+@keyframes shadowPulse {
+  0% { 
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  }
+  50% { 
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15));
+  }
+  100% { 
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  }
 }

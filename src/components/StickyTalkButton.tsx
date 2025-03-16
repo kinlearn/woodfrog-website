@@ -1,8 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button } from 'antd';
-import { MessageOutlined } from '@ant-design/icons';
 import ContactForm from './ContactUs';
+import CustomButton from './CustomButton';
 import gsap from 'gsap';
+import { useTheme } from "../ThemeContext";
+
+// Message icon component
+const MessageIcon = () => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="20" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+);
 
 const StickyTalkButton: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -12,19 +29,11 @@ const StickyTalkButton: React.FC = () => {
   const inactivityTimeout = useRef<NodeJS.Timeout | null>(null);
   const pulseTimeout = useRef<NodeJS.Timeout | null>(null);
   const isAnimating = useRef<boolean>(false);
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { isDarkTheme } = useTheme();
   
-  // Check for dark mode and mobile
+  // Check for mobile
   useEffect(() => {
-    // Check for dark mode
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModeQuery.matches);
-    
-    const darkModeHandler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    darkModeQuery.addEventListener('change', darkModeHandler);
-    
-    // Check for mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -33,7 +42,6 @@ const StickyTalkButton: React.FC = () => {
     window.addEventListener('resize', checkMobile);
     
     return () => {
-      darkModeQuery.removeEventListener('change', darkModeHandler);
       window.removeEventListener('resize', checkMobile);
     };
   }, []);
@@ -63,8 +71,6 @@ const StickyTalkButton: React.FC = () => {
         ease: "power2.out",
         onComplete: () => {
           isAnimating.current = false;
-          
-          // Reset inactivity timers
           resetInactivityTimers();
         }
       });
@@ -216,33 +222,22 @@ const StickyTalkButton: React.FC = () => {
     };
   }, []); // Empty dependency array since we're using refs
   
+  // IMPROVED: showModal function to prevent dark flash
   const showModal = () => {
-    // Reset animations and show modal
+    // Reset animations
     stopPulseAnimation();
+    
+    // Show modal
     setIsModalVisible(true);
   };
   
   // Determine button position based on device type
   const buttonPosition = isMobile ? {
-    bottom: '60px', // Higher position on mobile to avoid keyboard
-    right: '20px'   // Slightly closer to edge on mobile
+    bottom: '60px', 
+    right: '20px'   
   } : {
     bottom: '30px',
     right: '30px'
-  };
-  
-  // Determine button styles based on dark/light mode
-  const buttonStyle = {
-    padding: '0 25px',
-    height: '50px',
-    fontSize: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    boxShadow: isDarkMode 
-      ? '0 4px 12px rgba(255, 255, 255, 0.15)' 
-      : '0 4px 12px rgba(0, 0, 0, 0.15)',
-    backgroundColor: isDarkMode ? '#1668dc' : '#1890ff',
-    borderColor: isDarkMode ? '#1668dc' : '#1890ff'
   };
   
   return (
@@ -271,21 +266,26 @@ const StickyTalkButton: React.FC = () => {
           resetInactivityTimers();
         }}
       >
-        <Button
+        <CustomButton
           type="primary"
-          shape="round"
           size="large"
-          icon={<MessageOutlined />}
+          rounded={true}
+          icon={<MessageIcon />}
           onClick={showModal}
-          style={buttonStyle}
+          style={{
+            boxShadow: isDarkTheme 
+              ? '0 4px 12px rgba(255, 255, 255, 0.15)' 
+              : '0 4px 12px rgba(0, 0, 0, 0.15)',
+          }}
         >
           Let's Talk!
-        </Button>
+        </CustomButton>
       </div>
 
       <ContactForm
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
+        className={isDarkTheme ? 'dark-theme-modal' : ''}
       />
     </>
   );

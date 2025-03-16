@@ -5,6 +5,7 @@ import HEADER from "../HEADER";
 import PlatformBenefits1 from "../PlatformBenefits1";
 import "./Common.css"
 import HeaderComponet from "../HeaderComponent";
+import Footer from "../Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../ThemeContext";
 
@@ -19,6 +20,7 @@ const SmartManufacturing: FunctionComponent<HorizontalTabsType> = ({
     const { isDarkTheme } = useTheme(); // Get the current theme state and toggle function
     const BackLogo = isDarkTheme ? '/back-arrow.svg' : '/back-arrow-light.svg';
     return (
+        <>
         <div className={styles.blogPage}>
             <HeaderComponet />
 
@@ -354,6 +356,8 @@ const SmartManufacturing: FunctionComponent<HorizontalTabsType> = ({
                 </div>
             </div>
         </div>
+        <Footer />
+    </>
     );
 };
 
