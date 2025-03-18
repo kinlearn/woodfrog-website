@@ -35,35 +35,35 @@ const offeringData = {
     {
       title: "Data Science Solutions",
       description: "We combine industry expertise with advanced data science capabilities to help you uncover opportunities, optimize operations, and make informed decisions.",
-      image: "/images/data-science-main.jpg",
+      image: "/images/DataScience/ds.jpg",
       imageAlt: "Data science visualization",
       features: [
         {
           title: "AI & ML Strategy Development",
           description: "We create customized AI/ML roadmaps aligned with your business goals. Our approach includes thorough assessment of your processes, identification of pain points, and development of strategic implementation plans.",
           icon: "strategy-icon",
-          image: "/images/ai-strategy.jpg",
+          image: "/images/AiStrategy/aiStrat.png",
           imageAlt: "Strategic planning illustration"
         },
         {
           title: "Product Development",
           description: "Our team builds intelligent products that learn and evolve with your business. From concept to deployment, we deliver solutions that enhance customer experiences and drive growth.",
           icon: "product-icon",
-          image: "/images/product-dev.jpg",
+          image: "/images/ProductDevelopment/prodDev.png",
           imageAlt: "Product development cycle"
         },
         {
           title: "Enterprise Data Management",
           description: "Transform your data landscape with our comprehensive approach to data management. We ensure seamless data democratization, reduce costs, and align your data with business priorities.",
           icon: "data-icon",
-          image: "/images/enterprise-data.jpg",
+          image: "/images/EnterpriceDataManagement/edm.png",
           imageAlt: "Data management system"
         },
         {
           title: "Advanced Analytics",
           description: "Turn complex data into actionable insights with our analytics services. We provide data visualization, predictive analytics, and business intelligence solutions tailored to your needs.",
           icon: "analytics-icon",
-          image: "/images/analytics.jpg",
+          image: "/images/AdvancedAnalytics/aa.png",
           imageAlt: "Analytics dashboard"
         }
       ]
@@ -71,28 +71,28 @@ const offeringData = {
     {
       title: "Large Language Models & AI Agents",
       description: "Harness the revolutionary power of LLMs and AI agents to automate complex tasks, unlock insights, and transform your business operations.",
-      image: "/images/llm-main.jpg",
+      image: "/images/llm/llm2.png",
       imageAlt: "AI language model illustration",
       features: [
         {
           title: "Custom LLM Solutions",
           description: "Generic solutions don't address unique business challenges. We create tailored LLM implementations infused with your specific business context and domain expertise, ensuring you maintain control of your data.",
           icon: "custom-icon",
-          image: "/images/custom-llm.jpg",
+          image: "/images/CustomLLM/CustomLLM.jpg",
           imageAlt: "Custom AI solution"
         },
         {
           title: "Automation & Scaling",
           description: "Our LLM solutions can automate up to 100% of repetitive tasks, dramatically improving efficiency and accuracy while reducing costs. Scale your operations with confidence using our AI-powered tools.",
           icon: "automation-icon",
-          image: "/images/automation.jpg",
+          image: "/images/AutomationScaling/autoScale.png",
           imageAlt: "Business automation"
         },
         {
           title: "Intelligent Agents",
           description: "Our LLM Agents and Small Language Models work together to tackle specific business needs. They enhance productivity, streamline workflows, and deliver personalized experiences with minimal computational resources.",
           icon: "agent-icon",
-          image: "/images/agents.jpg",
+          image: "/images/IntelligentAgents/ia.png",
           imageAlt: "AI agents at work"
         }
       ]
@@ -105,22 +105,22 @@ const offeringData = {
       {
         industry: "Retail Analytics",
         description: "Helped a retail chain improve inventory forecasting accuracy by 22% and reduce out-of-stock instances by 35% through advanced predictive analytics.",
-        image: "/images/retail-case.jpg"
+        image: "/images/RetailAnalytics/ra.png"
       },
       {
         industry: "Healthcare Operations",
         description: "Developed a patient flow optimization system that reduced average wait times by 40% and improved resource allocation for a major healthcare provider.",
-        image: "/images/healthcare-case.jpg"
+        image: "/images/Healthcare/hc.png"
       },
       {
         industry: "Financial Services",
         description: "Created a custom LLM solution that automated document processing and reduced manual review time by 70% while maintaining strict compliance standards.",
-        image: "/images/finance-case.jpg"
+        image: "/images/Finance/finance.jpg"
       },
       {
         industry: "Manufacturing",
         description: "Implemented a predictive maintenance system that decreased unplanned downtime by 27% and extended equipment lifespan by an estimated 15-20%.",
-        image: "/images/manufacturing-case.jpg"
+        image: "/images/Manufacturing/mf.png"
       }
     ]
   },

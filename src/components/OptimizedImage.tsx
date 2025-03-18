@@ -1,4 +1,5 @@
 import React, { forwardRef, useRef, useEffect, useState } from 'react';
+import styles from './OptimizedImage.module.css';
 
 interface OptimizedImageProps {
   src: string;
@@ -65,22 +66,24 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
     }, []);
     
     return (
-      <div className={`optimized-image-container ${animate ? 'animate' : ''} ${isLoaded ? 'loaded' : 'loading'}`}>
+      <div className={`${styles['optimized-image-container']} ${animate ? styles.animate : ''} ${isLoaded ? styles.loaded : styles.loading}`}>
         {/* Optional loading placeholder/skeleton */}
-        {!isLoaded && <div className="image-placeholder"></div>}
+        {!isLoaded && <div className={styles['image-placeholder']}></div>}
         
         <img
           ref={setRefs}
           src={src}
           alt={alt}
-          className={`${className || ''} ${isLoaded ? 'loaded' : 'loading'}`}
+          className={`${className || ''}`}
           width={width}
           height={height}
           loading={loading}
           onLoad={handleImageLoad}
           style={{
-            opacity: isLoaded ? 1 : 0,
-            transition: animate ? 'opacity 0.5s ease' : 'none'
+            // Remove default transition when GSAP is handling the animation
+            transition: animate ? undefined : 'none',
+            // When using GSAP, let it control the opacity entirely
+            opacity: animate ? undefined : (isLoaded ? 1 : 0)
           }}
         />
       </div>

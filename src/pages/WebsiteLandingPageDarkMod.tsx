@@ -17,9 +17,12 @@ const WebsiteLandingPageDarkMod: FunctionComponent = () => {
   const animationContext = useRef<gsap.Context | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const heroGraphicRef = useRef<HTMLDivElement | null>(null);
+  const imageContainerRef = useRef<HTMLDivElement | null>(null);
   
   // Initialize animations once on component mount
   useEffect(() => {
+    console.log("Initializing animations, image ref:", imageRef.current);
+    
     // Small delay to ensure DOM is fully rendered
     const timer = setTimeout(() => {
       // Initialize content animations
@@ -38,6 +41,13 @@ const WebsiteLandingPageDarkMod: FunctionComponent = () => {
         }
       );
       
+      // Target both the container and the image for better animation control
+      if (imageContainerRef.current) {
+        gsap.set(imageContainerRef.current, {
+          autoAlpha: 1  // Make sure container is visible
+        });
+      }
+      
       // Animate the hero image with GSAP
       if (imageRef.current) {
         // Start with image invisible
@@ -54,8 +64,12 @@ const WebsiteLandingPageDarkMod: FunctionComponent = () => {
           scale: 1,
           duration: 1.2,
           delay: 0.3,
-          ease: "power3.out"
+          ease: "power3.out",
+          onStart: () => console.log("Animation started for image"),
+          onComplete: () => console.log("Animation completed for image")
         });
+      } else {
+        console.warn("Image ref not available for animation");
       }
       
       // Animate the hero graphic glow
@@ -75,7 +89,7 @@ const WebsiteLandingPageDarkMod: FunctionComponent = () => {
         );
       }
       
-    }, 100);
+    }, 300); // Increased delay to ensure DOM and refs are ready
     
     // Create subtle floating animation for the dashboard image
     const floatAnimation = () => {
@@ -104,7 +118,7 @@ const WebsiteLandingPageDarkMod: FunctionComponent = () => {
     };
     
     // Start floating animation after initial entrance
-    const floatTimer = setTimeout(floatAnimation, 1600);
+    const floatTimer = setTimeout(floatAnimation, 1800);
     
     // Cleanup function
     return () => {
@@ -128,14 +142,15 @@ const WebsiteLandingPageDarkMod: FunctionComponent = () => {
     <div className={styles.websiteLandingPageDarkMod}>
       <FrameComponent />
       
-      {/* Use OptimizedImage instead of regular img but add ref for animation */}
-      <div className={styles.imageContainer}>
+      {/* Use container ref for better animation control */}
+      <div ref={imageContainerRef} className={styles.imageContainer}>
         <OptimizedImage
           ref={imageRef}
           src={isDarkTheme ? "/image_17.svg" : '/image_20.svg'}
           alt="Dashboard visualization"
           className={styles.image17Icon}
           animate={false} // We're handling animation with GSAP instead
+          loading="eager" // Ensure image loads immediately
         />
       </div>
       

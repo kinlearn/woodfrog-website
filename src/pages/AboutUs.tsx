@@ -71,7 +71,7 @@ const aboutUsData: AboutUsData = {
       title: 'Our Story',
       description: `We began with a simple yet ambitious goal: to empower businesses to make informed decisions through data-driven insights.
       Our founder & core team, passionate about AI and analytics, assembled a team of talented individuals who share a common vision.`,
-      image: '/images/our-story.jpg',
+      image: '/images/OurStory/os2.png',
       imageAlt: 'Woodfrog team collaborating',
       imagePosition: 'right'
     },
@@ -84,7 +84,7 @@ const aboutUsData: AboutUsData = {
         'Fostering long-term partnerships with our clients',
         'Cultivating a culture of continuous learning and innovation',
       ],
-      image: '/images/our-mission.jpg',
+      image: '/images/OurMission/om2.png',
       imageAlt: 'Data visualization dashboard',
       imagePosition: 'left'
     },
@@ -96,7 +96,7 @@ const aboutUsData: AboutUsData = {
         'Collaboration: Together, we achieve more',
         'Integrity: Transparency and ethics guide our actions',
       ],
-      image: '/images/our-values.jpg',
+      image: '/images/OurValues/ov2.png',
       imageAlt: 'Team values illustration',
       imagePosition: 'right'
     },
@@ -109,7 +109,7 @@ const aboutUsData: AboutUsData = {
         'Data engineering: Building scalable, efficient data infrastructure',
         'Machine learning: Developing predictive models for informed decision-making',
       ],
-      image: '/images/our-expertise.jpg',
+      image: '/images/OurExpertise/oe2.png',
       imageAlt: 'Data analysis in progress',
       imagePosition: 'left'
     },
@@ -130,7 +130,7 @@ const aboutUsData: AboutUsData = {
           'Ongoing support: Continuous guidance and optimization'
         ]
       },
-      image: '/images/our-approach.jpg',
+      image: '/images/OurApproach/oa2.png',
       imageAlt: 'Team consulting with clients',
       imagePosition: 'right'
     },
@@ -148,7 +148,7 @@ const aboutUsData: AboutUsData = {
             'Customer experience enhancements: Personalizing interactions and improving satisfaction',
             'Large language model (LLM) agents: Revolutionizing customer support and engagement'
           ],
-          image: '/images/tailored-ai.jpg',
+          image: '/images/TailoredSolutions/ts.png',
           imageAlt: 'AI customization illustration'
         },
         {
@@ -158,7 +158,7 @@ const aboutUsData: AboutUsData = {
             'Agile decision-making: Responding promptly to changing market conditions',
             'Data-driven strategy: Informing business decisions with up-to-the-minute information'
           ],
-          image: '/images/real-time-insights.jpg',
+          image: '/images/RealTimeInsights/rti.png',
           imageAlt: 'Real-time data dashboard'
         },
         {
@@ -168,7 +168,7 @@ const aboutUsData: AboutUsData = {
             'Effective insights utilization: Empowering teams to make data-driven decisions',
             'Collaborative workflow: Enhancing cross-functional communication and alignment'
           ],
-          image: '/images/intuitive-tools.jpg',
+          image: '/images/IntuitiveTools/it.png',
           imageAlt: 'User-friendly interface'
         }
       ],
@@ -178,7 +178,7 @@ const aboutUsData: AboutUsData = {
   closing: {
     title: 'Join the Woodfrog Journey',
     description: `Discover how our cutting-edge AI and analytics solutions can transform your business. Let's collaborate to unlock data-driven growth, efficiency, and success.`,
-    image: '/images/join-woodfrog.jpg',
+    image: '/images/JoinWoodfrogJourney/jwj2.png',
     imageAlt: 'Collaboration illustration',
     imagePosition: 'right'
   }

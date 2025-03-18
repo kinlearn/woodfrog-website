@@ -9,6 +9,7 @@
   will-change: transform;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  min-height: 300px; /* Ensure container has height before image loads */
 }
 
 .heroGraphicChild {
@@ -21,6 +22,7 @@
   background: linear-gradient(179.99deg, rgba(206, 113, 49, 0.15), #ce7131);
   z-index: 1;
   will-change: transform, opacity;
+  opacity: 0; /* Start invisible for animation */
 }
 
 .image17Icon {
@@ -35,6 +37,7 @@
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  opacity: 0; /* Start invisible for GSAP to animate */
 }
 
 .heroImage {
@@ -91,6 +94,34 @@
 .imageBackground {
   max-width: 90%;
   margin: -14% 10% 0px 5.5%;
+}
+
+/* Loading placeholder styles */
+.image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Animation for loaded image (for non-GSAP fallback) */
+.optimized-image-container.loaded .image-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* Small devices (landscape phones, 576px and up) */
